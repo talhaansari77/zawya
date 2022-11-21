@@ -6,20 +6,15 @@ import MainStack from './MainStack/MainStack';
 import {StatusBar} from 'react-native';
 
 const RootNavigator = () => {
-  const MyTheme = {
-    ...DefaultTheme,
-    colors: {
-      ...DefaultTheme.colors,
-      background: 'rgb(48,62,96)',
-    },
-  };
+ 
 
   const Stack = createStackNavigator();
   return (
-    <NavigationContainer theme={MyTheme}>
+    <NavigationContainer >
       <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="MainStack" component={MainStack} />
+
         <Stack.Screen name="AuthStack" component={AuthStack} />
-        <Stack.Screen name="MainStack" component={MainStack} />
       </Stack.Navigator>
       <StatusBar barStyle={'light-content'} />
     </NavigationContainer>

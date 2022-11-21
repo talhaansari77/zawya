@@ -9,6 +9,7 @@ import {
     Platform, View
   } from 'react-native'
 import styled from 'react-native-styled-components';
+import { colors } from './Colors';
   // import colors from './colors';
   const commonStyles = ScaledSheet.create({
     container: {
@@ -49,7 +50,8 @@ import styled from 'react-native-styled-components';
 
     IosPadding:{
       flex: 1,paddingTop:Platform.OS=="ios"?verticalScale(40):5,
-      paddingHorizontal:moderateScale(15)
+      paddingHorizontal:moderateScale(15),
+      backgroundColor:colors.white
     }
   });
 
