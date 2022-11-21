@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  Platform
 } from "react-native";
 import React from "react";
 import {
@@ -15,6 +16,7 @@ import {
 } from "react-native-size-matters";
 import CustomText from "./CustomText";
 import {colors} from "../utils/Colors"
+import commonStyles from "../utils/CommonStyles";
 
 const CustomTextInput = ({
   eyeClick,
@@ -22,6 +24,10 @@ const CustomTextInput = ({
   setEyeClick,
   error,
   withLabel,
+  leftIcon,
+  source,
+  iconWidth,
+  iconHeight,
   ...props
 }) => {
   return (
@@ -41,22 +47,50 @@ const CustomTextInput = ({
         style={[
           {
             width: props.width || "100%",
-            height: props.height || verticalScale(40),
-            borderRadius: props.borderRadius || moderateScale(15),
+            height: props.height || verticalScale(50),
+            borderRadius: props.borderRadius || moderateScale(30),
             backgroundColor: props.backgroundColor,
             marginTop: props.marginTop || verticalScale(0),
             flexDirection: "row",
             borderColor: props.borderColor ,
             alignItems: "center",
             paddingLeft: props.paddingLeft,
+
+            backgroundColor:colors.white,
+
+            shadowColor: Platform.OS=="ios"?"#ced4da":colors.black,
+            shadowRadius: 8,
+            elevation: 5,
+            alignItems: "center",
+            shadowOpacity: 0.5,
+        
+            shadowOffset: { width: 3, height: 5 },
           },
         ]}
       >
+        {
+          leftIcon?(
+            <View style={{
+
+              width:  iconWidth ||scale(20),
+              height:  iconHeight||verticalScale(20),
+              marginLeft:verticalScale(10),
+
+            }} >
+           <Image style={commonStyles.img} source={leftIcon} />
+
+
+            </View>
+
+          ):<></>
+        }
+
+
 
         <TextInput
           style={[
             {
-              width:  password || eyeClick||props.mic || props.downArrow? props.inputWidth  : "95%",
+              width: props.inputWidth  || "95%",
               height: props.inputHeight || "100%",
               marginLeft: props.inputLeftMargin || 10,
               paddingRight: props.paddingRight || 10,
@@ -64,7 +98,7 @@ const CustomTextInput = ({
               fontFamily: props.fontFamily || "Montserrat-regular",
               color: props.color || colors.white,
               fontSize: verticalScale(13),
-              textAlign: props.textAlign || "center",
+              // textAlign: props.textAlign || "center",
               multiline: props.multiline
               // alignSelf: props.alignItems || "center"
             },
@@ -79,31 +113,7 @@ const CustomTextInput = ({
           placeholderTextColor={props.placeholderTextColor}
           secureTextEntry={props.secureTextEntry}
         />
-        {password ? (
-          <TouchableOpacity
-            activeOpacity={0.6}
-            onPress={() => {
-              setEyeClick(!eyeClick);
-            }}
-          >
-            {eyeClick ? (
-              <Ionicons
-                name="eye-off"
-                size={moderateScale(22)}
-                style={{ opacity: 0.5 }}
-                color={colors.primary}
-              />
-            ) : (
-              <Ionicons
-                name="eye"
-                size={moderateScale(22)}
-                style={{ opacity: 0.5 }}
-                color={colors.primary}
-              />
-            )}
-            {/* <Image style={styles.icon} source={eyeClick ? images.eye:images.hiddenEye } /> */}
-          </TouchableOpacity>
-        ) : null}
+       
 
       </TouchableOpacity>
       {error ? (
@@ -123,7 +133,7 @@ export default CustomTextInput;
 const styles = ScaledSheet.create({
   icon: {
     width: "20@s",
-    height: "15@vs",
-    tintColor: colors.gray,
+    height: "20@vs",
+    marginLeft:verticalScale(10),
   },
 });
