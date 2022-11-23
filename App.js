@@ -8,6 +8,7 @@ LogBox.ignoreLogs(['VirtualizedLists', 'Warning:...']);
 LogBox.ignoreAllLogs();
 
 const App = () => {
+
   return (
     <Provider store={store}>
       <RootNavigator />
