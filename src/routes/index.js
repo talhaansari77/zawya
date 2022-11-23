@@ -6,14 +6,12 @@ import MainStack from './MainStack/MainStack';
 import {StatusBar} from 'react-native';
 
 const RootNavigator = () => {
- 
-
   const Stack = createStackNavigator();
   return (
-    <NavigationContainer >
+    <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="MainStack" component={MainStack} />
-
+        
+        <Stack.Screen name="MainStack" component={MainStack} />
         <Stack.Screen name="AuthStack" component={AuthStack} />
       </Stack.Navigator>
       <StatusBar barStyle={'light-content'} />

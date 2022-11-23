@@ -10,7 +10,7 @@ const MainStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      initialRouteName={"Signout"}
+      initialRouteName={"AddDesign"}
     >
       <Stack.Screen name="AddDesign" component={AddDesignScreen} />
       <Stack.Screen name="Signout" component={SignOutScreen} />

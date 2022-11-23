@@ -24,7 +24,7 @@ function CustomButton({
   fontFamily,
   marginBottom,
   fontSize,
-  marginHorizontal
+  marginHorizontal,
 }) {
   return (
     <TouchableOpacity
@@ -39,6 +39,8 @@ function CustomButton({
           alignItems: alignItems || 'center',
           justifyContent: justifyContent || 'center',
           marginTop,
+          borderWidth,
+          borderColor,
           marginBottom:marginBottom,
           marginHorizontal:marginHorizontal
         },

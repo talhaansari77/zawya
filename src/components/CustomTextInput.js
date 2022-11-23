@@ -56,13 +56,13 @@ const CustomTextInput = ({
             alignItems: "center",
             paddingLeft: props.paddingLeft,
 
-            backgroundColor:colors.white,
+            backgroundColor: props.backgroundColor || colors.white,
 
             shadowColor: Platform.OS=="ios"?"#ced4da":colors.black,
-            shadowRadius: 8,
-            elevation: 5,
+            shadowRadius: props.shadowRadius || 8,
+            elevation: props.elevation || 5,
             alignItems: "center",
-            shadowOpacity: 0.5,
+            shadowOpacity: props.shadowOpacity || 0.5,
         
             shadowOffset: { width: 3, height: 5 },
           },
@@ -96,7 +96,8 @@ const CustomTextInput = ({
               paddingRight: props.paddingRight || 10,
               paddingHorizontal: props.paddingHorizontal,
               fontFamily: props.fontFamily || "Montserrat-regular",
-              color: props.color || colors.white,
+              color: props.color || colors.black,
+              // backgroundColor: props.backgroundColor,
               fontSize: verticalScale(13),
               // textAlign: props.textAlign || "center",
               multiline: props.multiline
