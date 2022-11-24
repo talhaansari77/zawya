@@ -8,9 +8,11 @@ import {icons} from '../../../../assets/icons';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {Spacer} from '../../../../components/Spacer';
+import {OpenImageLib} from '../../../../components/imageSelector';
 
 const DesignForm = () => {
   const [selected, setSelected] = useState('');
+  const [banner, setBanner] = useState('');
 
   const data = [
     {key: '2', value: 'Appliances'},
@@ -66,37 +68,37 @@ const DesignForm = () => {
     },
   ];
 
-//   const onClickImage = async () => {
-//     try {
-//       const result = await launchImageLibrary({
-//         mediaType: 'photo',
-//         quality: 0.8,
-//       });
-//       if (!result.cancelled) {
-//         console.log('ImagesDetail✌', result.assets[0].uri);
-//         // setUri(result);
-//         setUri(result.assets[0].uri);
-//         const itemIndex = images.findIndex(item => item.index === index);
-//         if (itemIndex === -1) {
-//           setImages([
-//             ...images,
-//             {
-//               index,
-//               uri: result.assets[0].uri,
-//             },
-//           ]);
-//         } else {
-//           const temp = [...images];
-//           temp[itemIndex] = {...temp[itemIndex], uri: result.assets[0].uri};
-//           setImages(temp);
-//         }
-//       } else {
-//         setUri('');
-//       }
-//     } catch (error) {
-//       console.log('Error reading an image', error);
-//     }
-//   };
+  //   const onClickImage = async () => {
+  //     try {
+  //       const result = await launchImageLibrary({
+  //         mediaType: 'photo',
+  //         quality: 0.8,
+  //       });
+  //       if (!result.cancelled) {
+  //         console.log('ImagesDetail✌', result.assets[0].uri);
+  //         // setUri(result);
+  //         setUri(result.assets[0].uri);
+  //         const itemIndex = images.findIndex(item => item.index === index);
+  //         if (itemIndex === -1) {
+  //           setImages([
+  //             ...images,
+  //             {
+  //               index,
+  //               uri: result.assets[0].uri,
+  //             },
+  //           ]);
+  //         } else {
+  //           const temp = [...images];
+  //           temp[itemIndex] = {...temp[itemIndex], uri: result.assets[0].uri};
+  //           setImages(temp);
+  //         }
+  //       } else {
+  //         setUri('');
+  //       }
+  //     } catch (error) {
+  //       console.log('Error reading an image', error);
+  //     }
+  //   };
 
   return (
     <View style={{width: '100%', paddingHorizontal: 25}}>
@@ -116,6 +118,7 @@ const DesignForm = () => {
         data={data}
         save="value"
         placeholder="Get Now"
+        placeholderTextColor={'#000'}
         arrowicon={
           <Image
             style={{
@@ -137,29 +140,36 @@ const DesignForm = () => {
           fontSize: verticalScale(14),
           fontWeight: '200',
           alignSelf: 'center',
+          colors:'#000'
         }}
       />
       <Spacer height={20} />
       <View
         style={{
           width: '100%',
-          padding: verticalScale(25),
+          padding: verticalScale(banner?0:25),
           borderWidth: 1,
           borderColor: colors.grey,
         }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => OpenImageLib(setBanner)}>
           <View style={{alignItems: 'center'}}>
             <Image
-              source={icons.uploadImage}
+              source={banner ? {uri: banner} : icons.uploadImage}
               resizeMode={'contain'}
               style={{
-                height: verticalScale(30),
-                width: scale(40),
-                marginBottom: 5,
+                height: verticalScale(banner?100:30),
+                width: "100%",
+                marginBottom: banner ? 0 : 5,
               }}
             />
-            <Spacer height={5} />
-            <CustomText label={'Upload Video or Photo'} />
+            {banner ? (
+              <></>
+            ) : (
+              <>
+                <Spacer height={5} />
+                <CustomText label={'Upload Video or Photo'} />
+              </>
+            )}
           </View>
         </TouchableOpacity>
       </View>

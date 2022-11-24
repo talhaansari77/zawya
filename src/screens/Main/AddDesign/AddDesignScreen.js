@@ -20,6 +20,7 @@ const AddDesignScreen = () => {
           <Spacer height={10} />
           <DesignForm />
           <DesignFormBottom />
+          <Spacer height={20} />
         </ScrollView>
       </SafeAreaView>
     </View>
@@ -27,5 +28,3 @@ const AddDesignScreen = () => {
 };
 
 export default AddDesignScreen;
-
-const styles = StyleSheet.create({});
