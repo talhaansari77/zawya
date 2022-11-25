@@ -32,7 +32,6 @@ const CategoriesScreen = () => {
   const renderCategory = ({item, index}) => {
     return <CategoriesItem item={item} />;
   };
-
   const renderStore = ({item, index}) => {
     return (
       <View style={{flex: 1}}>
