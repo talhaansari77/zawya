@@ -1,4 +1,11 @@
-import {StyleSheet, Text, View, Image,Dimensions, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import {images} from '../../../../assets/images';
 import commonStyles from '../../../../utils/CommonStyles';
@@ -10,20 +17,23 @@ import {moderateScale, verticalScale} from 'react-native-size-matters';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const Width = Dimensions.get('window').width;
-const StoreItem = ({item,onPress}) => {
-
-  console.log("ItemStoreData",item)
+const StoreItem = ({item, onPress}) => {
+  console.log('ItemStoreData', item);
 
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={styles.mainContainer}>
-      <Image source={item.image}
-      resizeMode="contain"
-       style={{width: '100%', height: '100%',}} />
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.7}
+      style={styles.mainContainer}>
+      <Image
+        source={item.image}
+        // resizeMode="contain"
+        style={{width: '100%', height: '100%'}}
+      />
 
-      {/* <View style={styles.cover}></View> */}
+      <View style={styles.cover}></View>
 
-      {/* <View
-        style={styles.storeContainer}>
+      <View style={styles.storeContainer}>
         <View
           style={{
             width: '100%',
@@ -46,7 +56,7 @@ const StoreItem = ({item,onPress}) => {
             />
           </View>
         </View>
-      </View>  */}
+      </View>
     </TouchableOpacity>
   );
 };
@@ -55,31 +65,34 @@ export default StoreItem;
 
 const styles = StyleSheet.create({
   mainContainer: {
-    width: Width/2.2,
-    height: verticalScale(150),
+    width: Width / 2.4,
+    height: verticalScale(180),
     flexDirection: 'row',
+    borderRadius: 15,
+    overflow: 'hidden',
+    marginBottom: verticalScale(20),
+    // paddingRight:
   },
   cover: {
     position: 'absolute',
-    width: Width/2.2,
-    height: verticalScale(150),
-    bottom: 0,
+    width: '100%',
+    height: '100%',
+    // bottom: 0,
     justifyContent: 'flex-end',
     flexDirection: 'row',
     backgroundColor: 'black',
     opacity: 0.3,
-    marginLeft: verticalScale(6),
-    borderRadius: 10,
+    // marginLeft: verticalScale(6),
   },
-  storeContainer:{
+  storeContainer: {
     position: 'absolute',
     width: '100%',
     height: '100%',
-    bottom: verticalScale(5),
+    bottom: verticalScale(10),
     paddingHorizontal: verticalScale(5),
     flexDirection: 'row',
     marginLeft: verticalScale(6),
     zIndex: 1,
     alignItems: 'flex-end',
-  }
+  },
 });

@@ -9,7 +9,8 @@ import {Montserrat} from '../../../utils/Fonts';
 import CustomText from '../../../components/CustomText';
 import {Spacer} from '../../../components/Spacer';
 import StoreItem from './Molecules/StoreItem';
-import { useNavigation } from '@react-navigation/core';
+import {useNavigation} from '@react-navigation/core';
+import {verticalScale} from 'react-native-size-matters';
 
 const CategoryData = [
   {id: 1, image: images.category1, txt: 'Category'},
@@ -35,7 +36,7 @@ const CategoriesScreen = () => {
   const renderStore = ({item, index}) => {
     return (
       <View style={{flex: 1}}>
-        <StoreItem item={item} onPress={()=>navigation.navigate("Store")}/>
+        <StoreItem item={item} onPress={() => navigation.navigate('Store')} />
       </View>
     );
   };
@@ -69,14 +70,15 @@ const CategoriesScreen = () => {
           keyExtractor={item => item.id}
         /> */}
         {/* </View> */}
-        <View>
-          <FlatList
-            numColumns={2}
-            data={storeData}
-            renderItem={renderStore}
-            keyExtractor={item => item.id}
-          />
-        </View>
+        {/* <StoreItem/> */}
+        {/* <View style={{marginBottom:verticalScale(100)}}> */}
+        <FlatList
+          numColumns={2}
+          data={storeData}
+          renderItem={renderStore}
+          keyExtractor={item => item.id}
+        />
+        {/* </View> */}
 
         {/* <StoreItem /> */}
       </PH5>
