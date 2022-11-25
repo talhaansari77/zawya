@@ -118,6 +118,7 @@ const DesignForm = () => {
         data={data}
         save="value"
         placeholder="Get Now"
+        colors={colors.black}
         placeholderTextColor={'#000'}
         arrowicon={
           <Image
@@ -140,15 +141,17 @@ const DesignForm = () => {
           fontSize: verticalScale(14),
           fontWeight: '200',
           alignSelf: 'center',
-          color:'#000',
-          
+          color: 'black',
+        }}
+        dropdownTextStyles={{
+          color: 'black',
         }}
       />
       <Spacer height={20} />
       <View
         style={{
           width: '100%',
-          padding: verticalScale(banner?0:25),
+          padding: verticalScale(banner ? 0 : 25),
           borderWidth: 1,
           borderColor: colors.grey,
         }}>
@@ -158,8 +161,8 @@ const DesignForm = () => {
               source={banner ? {uri: banner} : icons.uploadImage}
               resizeMode={'contain'}
               style={{
-                height: verticalScale(banner?100:30),
-                width: "100%",
+                height: verticalScale(banner ? 100 : 30),
+                width: '100%',
                 marginBottom: banner ? 0 : 5,
               }}
             />
