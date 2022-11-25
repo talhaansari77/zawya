@@ -140,7 +140,8 @@ const DesignForm = () => {
           fontSize: verticalScale(14),
           fontWeight: '200',
           alignSelf: 'center',
-          colors:'#000'
+          color:'#000',
+          
         }}
       />
       <Spacer height={20} />

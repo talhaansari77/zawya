@@ -9,8 +9,10 @@ import {Spacer} from '../../../../components/Spacer';
 import {icons} from '../../../../assets/icons';
 import CustomButton from '../../../../components/CustomButton';
 import AuthOption from './AuthOption';
+import {useNavigation} from '@react-navigation/core';
 
 const BodyItem = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.mainContainer}>
       <CustomText
@@ -38,11 +40,14 @@ const BodyItem = () => {
         iconHeight={verticalScale(15)}
       />
       <Spacer height={30} />
-      <CustomButton title="Log In" width={'95%'} />
+      <CustomButton
+        title="Log In"
+        width={'95%'}
+        onPress={() => navigation.navigate('MainStack')}
+      />
       <Spacer height={20} />
 
-
-      <AuthOption/>
+      <AuthOption />
     </View>
   );
 };

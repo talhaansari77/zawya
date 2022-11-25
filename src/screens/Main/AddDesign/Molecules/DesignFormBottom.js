@@ -8,8 +8,10 @@ import {colors} from '../../../../utils/Colors';
 import {scale, verticalScale} from 'react-native-size-matters';
 import CustomButton from '../../../../components/CustomButton';
 import {OpenImageLib} from '../../../../components/imageSelector';
+import { useNavigation } from '@react-navigation/core';
 
 const DesignFormBottom = () => {
+  const navigation = useNavigation();
   const [logo, setLogo] = useState('');
   const [templateIndex, setTemplateIndex] = useState(-1);
 
@@ -144,6 +146,7 @@ const DesignFormBottom = () => {
           borderColor={colors.black}
           color={colors.black}
           title={'Cancel'}
+          onPress={()=>navigation.goBack() }
         />
         <CustomButton title={'Next'} width={120} height={55} />
       </View>

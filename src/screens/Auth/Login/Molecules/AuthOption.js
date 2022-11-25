@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, Platform, Image} from 'react-native';
+import {StyleSheet, Text, View, Platform, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {colors} from '../../../../utils/Colors';
 import CustomText from '../../../../components/CustomText';
@@ -7,13 +7,11 @@ import {moderateScale, scale, verticalScale} from 'react-native-size-matters';
 import {Spacer} from '../../../../components/Spacer';
 import {icons} from '../../../../assets/icons';
 
-
-const AuthDate=[
-    {id:1,img:icons.google},
-    {id:2,img:icons.facebook},
-    {id:3,img:icons.linkend},
-
-]
+const AuthDate = [
+  {id: 1, img: icons.google},
+  {id: 2, img: icons.facebook},
+  {id: 3, img: icons.linkend},
+];
 
 const AuthOption = () => {
   return (
@@ -36,20 +34,16 @@ const AuthOption = () => {
           alignItems: 'center',
           justifyContent: 'space-around',
         }}>
-            {
-                AuthDate.map(item=>{
-                    return(
-                        <View style={styles.authContainer}>
-                        <Image
-                          style={{width: scale(18), height: verticalScale(18)}}
-                          source={item.img}
-                        />
-                      </View>
-                    
-                    )
-                })
-            }
-       
+        {AuthDate.map(item => {
+          return (
+            <TouchableOpacity activeOpacity={0.7} style={styles.authContainer}>
+              <Image
+                style={{width: scale(18), height: verticalScale(18)}}
+                source={item.img}
+              />
+            </TouchableOpacity>
+          );
+        })}
       </View>
     </View>
   );
