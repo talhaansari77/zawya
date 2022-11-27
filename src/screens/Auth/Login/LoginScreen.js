@@ -6,7 +6,7 @@ import {moderateScale, verticalScale} from 'react-native-size-matters';
 import {Spacer} from '../../../components/Spacer';
 import BodyItem from './Molecules/BodyItem';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
   return (
     <View style={commonStyles.IosPadding}>
       <PH10>
@@ -23,7 +23,15 @@ const LoginScreen = () => {
         </View>
         <Spacer height={25} />
 
-        <BodyItem />
+        <BodyItem 
+
+btnLabel={"Log In"}
+topLabel={"Log In"}
+onPress={()=>{
+    navigation.navigate("SignupScreen")
+
+}}
+        />
       </PH10>
     </View>
   );

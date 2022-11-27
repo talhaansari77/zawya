@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "119969049092",
+    "project_id": "zawya-ad",
+    "storage_bucket": "zawya-ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119969049092:android:61ab5d38d42a0678f92351",
+        "android_client_info": {
+          "package_name": "com.zawya"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119969049092-tb3bba0f6id6oejeqngcpvg5crshhhk5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClLTugtF7Y2TxxIlIB_lyOcvu5aY-FlQw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119969049092-tb3bba0f6id6oejeqngcpvg5crshhhk5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "119969049092-r0hmllsbq8j192oprg81anp46v9d6ic9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Zawya"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

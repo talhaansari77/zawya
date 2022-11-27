@@ -30,6 +30,8 @@ const CustomTextInput = ({
   iconHeight,
   ...props
 }) => {
+
+  console.log("Eror",error)
   return (
     <View>
       {withLabel ? (
