@@ -19,14 +19,7 @@ const MainStack = () => {
   const Tab = createBottomTabNavigator();
   const Stack = createStackNavigator();
 
-  // const stack = ()=>(
-  //   <Stack.Navigator
-  //     screenOptions={{headerShown: false}}
-  //   >
-  //     <Stack.Screen name="store" component={StoreScreen} />
-
-  //   </Stack.Navigator>
-  // )
+  
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
@@ -39,65 +32,6 @@ const MainStack = () => {
       <Stack.Screen name="SignOutScreen" component={SignOutScreen} />
       {/* <Stack.Screen name="AddDesignScreen" component={AddDesignScreen} /> */}
     </Stack.Navigator>
-    // <Tab.Navigator
-    //   screenOptions={({route}) => ({
-    //     headerShown: false,
-    //     tabBarShowLabel: false,
-    //     tabBarStyle: {
-    //       backgroundColor: colors.primary,
-    //       height: verticalScale(45),
-    //       paddingHorizontal: scale(10),
-    //       paddingTop: Platform.OS == 'ios' ? 10 : 0,
-    //     },
-    //     tabBarIcon: ({focused, size, color}) => {
-    //       let iconName;
-    //       if (route.name === 'Categories') {
-    //         iconName = icons.category;
-    //         return <Foundation name={'home'} size={25} color={colors.white} />;
-    //         // size = focused ? 27 : 25;
-    //       } else if (route.name === 'SignOutScreen') {
-    //         iconName = icons.store;
-    //         // size = focused ? 27 : 25;
-    //         return (
-    //           <FontAwesome name={'user'} size={25} color={colors.white} />
-    //         );
-    //       } else if (route.name === 'AddDesign') {
-    //         iconName = icons.adddesign;
-    //         size = focused ? 27 : 25;
-    //       }
-
-    //       return <FontAwesome name={'plus'} size={25} color={colors.white} />;
-    //     },
-    //   })}
-    //   activeColor="#f0edf6"
-    //   inactiveColor="#3e2465"
-    //   barStyle={{backgroundColor: '#694fad'}}
-    //   tabBarOptions={{
-    //     activeTintColor: colors.primary,
-    //     inactiveTintColor: '#000',
-    //     // activeBackgroundColor: '#fff',
-    //     showIcon: true,
-    //   }}
-    //   initialRouteName="StoreScreen">
-    //   <Tab.Screen name="Categories" component={CategoriesScreen} />
-    //   <Tab.Screen name="AddDesign" component={AddDesignScreen} />
-    //   <Tab.Screen name="SignOutScreen" component={SignOutScreen} />
-    //   {/* <Tab.Screen
-    //   options={{
-    //     tabBarItemStyle: { display: "none" },
-    //   }}
-    //   name="Store"
-    //   component={StoreScreen}
-    // /> */}
-    //   {/* <Tab.Screen
-    //   options={{
-    //     tabBarItemStyle: { display: "none" },
-    //   }}
-    //   name="Search"
-    //   component={Search}
-    // /> */}
-
-    // </Tab.Navigator>
   );
 };
 

@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React from 'react';
 import TopHeader from './Molecules/TopHeader';
-import commonStyles, {PH5} from '../../../utils/CommonStyles';
+import commonStyles, {PH20, PH5} from '../../../utils/CommonStyles';
 import CategoriesItem from './Molecules/CategoriesItem';
 import {images} from '../../../assets/images';
 import {colors} from '../../../utils/Colors';
@@ -12,6 +12,7 @@ import StoreItem from './Molecules/StoreItem';
 import {useNavigation} from '@react-navigation/core';
 import {verticalScale} from 'react-native-size-matters';
 import BottomTabs from '../../../components/BottomTabs';
+import {ScrollView} from 'react-native-gesture-handler';
 
 const CategoryData = [
   {id: 1, image: images.category1, txt: 'Category'},
@@ -34,62 +35,50 @@ const CategoriesScreen = ({navigation}) => {
   };
   const renderStore = ({item, index}) => {
     return (
-      <View style={{flex: 1}}>
-        <StoreItem
-          item={item}
-          onPress={() =>
-            navigation.navigate('StoreScreen')
-          }
-        />
-      </View>
+      <StoreItem
+        item={item}
+        onPress={() => navigation.navigate('StoreScreen')}
+      />
     );
   };
   return (
     <>
-      <View style={commonStyles.IosPadding}>
-        <PH5>
+      <View style={{flex: 1}}>
+        <PH20>
+          <Spacer height={40} />
           <TopHeader />
           <Spacer height={10} />
-
+        </PH20>
+          <ScrollView showsHorizontalScrollIndicator={false}>
+        <PH20>
           <CustomText
             label="Select Category"
             color={colors.primary}
             fontSize={21}
             fontFamily={Montserrat.SemiBold}
           />
-          <View style={{height: '15%'}}>
-            <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={CategoryData}
-              renderItem={renderCategory}
-              keyExtractor={item => item.id}
-            />
-          </View>
-
-          {/* <View style={{height:"20%",backgroundColor:"red"}}> */}
-
-          {/* <FlatList
-          data={storeData}
-          renderItem={renderStore}
-          keyExtractor={item => item.id}
-        /> */}
-          {/* </View> */}
-          {/* <StoreItem/> */}
-          {/* <View style={{marginBottom:verticalScale(100)}}> */}
+        </PH20>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={CategoryData}
+            renderItem={renderCategory}
+            keyExtractor={item => item.id}
+          />
+          <Spacer height={20} />
           <FlatList
             numColumns={2}
+            columnWrapperStyle={{
+              flex: 1,
+              justifyContent: 'space-evenly',
+            }}
             data={storeData}
             renderItem={renderStore}
             keyExtractor={item => item.id}
           />
-
-          {/* </View> */}
-
-          {/* <StoreItem /> */}
-        </PH5>
+        </ScrollView>
+        <BottomTabs navigation={navigation} />
       </View>
-      <BottomTabs navigation={navigation} />
     </>
   );
 };

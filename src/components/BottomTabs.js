@@ -18,6 +18,8 @@ export default function BottomTabs({navigation}) {
         paddingVertical: verticalScale(15),
         paddingHorizontal: scale(50),
         zIndex: 10,
+        // position:'absolute',
+        // bottom:0
       }}>
       <Icon
         name="home"

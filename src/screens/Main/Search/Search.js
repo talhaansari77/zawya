@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React, { useState } from 'react'
 import { Spacer } from '../../../components/Spacer'
 import { SearchBar } from 'react-native-elements'
+import { colors } from '../../../utils/Colors'
 
 const Search = () => {
     const [search, setSearch] = useState('')
