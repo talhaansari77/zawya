@@ -23,7 +23,7 @@ const TopHeader = () => {
         <Spacer width={10} />
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => navigation.navigate('Search')}
+          onPress={() => navigation.navigate('SearchStack')}
           style={{...styles.circleImage, borderColor: colors.grey}}>
           {/* <Image style={commonStyles.img} source={images.profileImg} /> */}
           <Ionicons name="search" color={colors.primary} size={40} />

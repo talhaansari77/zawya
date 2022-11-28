@@ -35,7 +35,7 @@ const CategoriesScreen = () => {
   const renderStore = ({item, index}) => {
     return (
       <View style={{flex: 1}}>
-        <StoreItem item={item} onPress={() => navigation.navigate('Store')} />
+        <StoreItem item={item} onPress={() => navigation.navigate('SearchStack',{screen:'StoreScreen'})} />
       </View>
     );
   };

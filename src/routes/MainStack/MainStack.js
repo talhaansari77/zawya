@@ -71,20 +71,20 @@ const MainStack = () => {
       <Tab.Screen name="Categories" component={CategoriesScreen} />
       <Tab.Screen name="AddDesign" component={AddDesignScreen} />
       <Tab.Screen name="SignOutScreen" component={SignOutScreen} />
-      <Tab.Screen
+      {/* <Tab.Screen
       options={{
         tabBarItemStyle: { display: "none" },
       }}
       name="Store"
       component={StoreScreen}
-    />
-      <Tab.Screen
+    /> */}
+      {/* <Tab.Screen
       options={{
         tabBarItemStyle: { display: "none" },
       }}
       name="Search"
       component={Search}
-    />
+    /> */}
 
 
     </Tab.Navigator>
