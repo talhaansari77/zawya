@@ -7,13 +7,26 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {moderateScale, verticalScale, scale} from 'react-native-size-matters';
 import {colors} from '../../utils/Colors';
 import Feather from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Foundation from 'react-native-vector-icons/Foundation';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {images} from '../../assets/images';
 import {icons} from '../../assets/icons';
 import StoreScreen from '../../screens/Main/Store/StoreScreen';
+import Search from '../../screens/Main/Search';
 
 const MainStack = () => {
   const Tab = createBottomTabNavigator();
+  // const Stack = createStackNavigator();
+
+  // const stack = ()=>(
+  //   <Stack.Navigator
+  //     screenOptions={{headerShown: false}}
+  //   >
+  //     <Stack.Screen name="store" component={StoreScreen} />
+
+  //   </Stack.Navigator>
+  // )
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -29,30 +42,20 @@ const MainStack = () => {
           let iconName;
           if (route.name === 'Categories') {
             iconName = icons.category;
+            return <Foundation name={'home'} size={25} color={colors.white} />;
             // size = focused ? 27 : 25;
-          } else if (route.name === 'Store') {
+          } else if (route.name === 'SignOutScreen') {
             iconName = icons.store;
             // size = focused ? 27 : 25;
             return (
-              <Image
-                resizeMode="contain"
-                source={iconName}
-                style={{width: moderateScale(15), height: verticalScale(15)}}
-              />
-              
+              <FontAwesome name={'user'} size={25} color={colors.white} />
             );
           } else if (route.name === 'AddDesign') {
             iconName = icons.adddesign;
             size = focused ? 27 : 25;
           }
 
-          return (
-            <Image
-              resizeMode="contain"
-              source={iconName}
-              style={{width: moderateScale(15), height: verticalScale(15)}}
-            />
-          );
+          return <FontAwesome name={'plus'} size={25} color={colors.white} />;
         },
       })}
       activeColor="#f0edf6"
@@ -64,34 +67,28 @@ const MainStack = () => {
         // activeBackgroundColor: '#fff',
         showIcon: true,
       }}
-      initialRouteName="Categories">
+      initialRouteName="StoreScreen">
       <Tab.Screen name="Categories" component={CategoriesScreen} />
-      <Tab.Screen name="Store" component={StoreScreen} />
-
       <Tab.Screen name="AddDesign" component={AddDesignScreen} />
-
-      {/* <Tab.Screen name="Categories" component={SettingStack} /> */}
-      {/* <Tab.Screen name="Favorite" component={favorite} />
-    <Tab.Screen name="Home" component={base} /> */}
-
-      {/* <Tab.Screen
+      <Tab.Screen name="SignOutScreen" component={SignOutScreen} />
+      <Tab.Screen
       options={{
         tabBarItemStyle: { display: "none" },
       }}
-      name="EditProfile"
-      component={EditProfile}
-    /> */}
-      {/* <Tab.Screen name="Profile" component={interests} /> */}
-    </Tab.Navigator>
-    // <Stack.Navigator
-    //   screenOptions={{headerShown: false}}
-    //   initialRouteName={"Categories"}
-    // >
-    //   <Stack.Screen name="AddDesign" component={AddDesignScreen} />
-    //   <Stack.Screen name="Signout" component={SignOutScreen} />
-    //   <Stack.Screen name="Categories" component={CategoriesScreen} />
+      name="Store"
+      component={StoreScreen}
+    />
+      <Tab.Screen
+      options={{
+        tabBarItemStyle: { display: "none" },
+      }}
+      name="Search"
+      component={Search}
+    />
 
-    // </Stack.Navigator>
+
+    </Tab.Navigator>
+    
   );
 };
 

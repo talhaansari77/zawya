@@ -23,14 +23,12 @@ const LoginScreen = ({navigation}) => {
         </View>
         <Spacer height={25} />
 
-        <BodyItem 
-
-btnLabel={"Log In"}
-topLabel={"Log In"}
-onPress={()=>{
-    navigation.navigate("SignupScreen")
-
-}}
+        <BodyItem
+          btnLabel={'Log In'}
+          topLabel={'Log In'}
+          onPress={() => {
+            navigation.navigate('SignupScreen');
+          }}
         />
       </PH10>
     </View>
