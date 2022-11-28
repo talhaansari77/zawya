@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: colors.primary,
     overflow: 'hidden',
-    marginTop: verticalScale(10),
+    marginTop: verticalScale(5),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.grey1,

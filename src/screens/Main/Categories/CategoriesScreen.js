@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, Text, View, FlatList, Platform} from 'react-native';
 import React from 'react';
 import TopHeader from './Molecules/TopHeader';
 import commonStyles, {PH20, PH5} from '../../../utils/CommonStyles';
@@ -42,14 +42,13 @@ const CategoriesScreen = ({navigation}) => {
     );
   };
   return (
-    <>
-      <View style={{flex: 1}}>
-        <PH20>
-          <Spacer height={40} />
-          <TopHeader />
-          <Spacer height={10} />
-        </PH20>
-          <ScrollView showsHorizontalScrollIndicator={false}>
+    <View style={{flex: 1}}>
+      <PH20>
+        <Spacer height={Platform.OS == 'ios' ? 40 : 5} />
+        <TopHeader />
+        <Spacer height={10} />
+      </PH20>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <PH20>
           <CustomText
             label="Select Category"
@@ -58,28 +57,27 @@ const CategoriesScreen = ({navigation}) => {
             fontFamily={Montserrat.SemiBold}
           />
         </PH20>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={CategoryData}
-            renderItem={renderCategory}
-            keyExtractor={item => item.id}
-          />
-          <Spacer height={20} />
-          <FlatList
-            numColumns={2}
-            columnWrapperStyle={{
-              flex: 1,
-              justifyContent: 'space-evenly',
-            }}
-            data={storeData}
-            renderItem={renderStore}
-            keyExtractor={item => item.id}
-          />
-        </ScrollView>
-        <BottomTabs navigation={navigation} />
-      </View>
-    </>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={CategoryData}
+          renderItem={renderCategory}
+          keyExtractor={item => item.id}
+        />
+        <Spacer height={20} />
+        <FlatList
+          numColumns={2}
+          columnWrapperStyle={{
+            flex: 1,
+            justifyContent: 'space-evenly',
+          }}
+          data={storeData}
+          renderItem={renderStore}
+          keyExtractor={item => item.id}
+        />
+      </ScrollView>
+      <BottomTabs navigation={navigation} />
+    </View>
   );
 };
 
