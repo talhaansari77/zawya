@@ -9,9 +9,11 @@ import TopHeader from './Molecules/TopHeader';
 import ProgressContainer from './Molecules/ProgressContainer';
 import ImageContainer from './Molecules/ImageContainer';
 import BottomContainer from './Molecules/BottomContainer';
+import BottomTabs from '../../../components/BottomTabs';
 
-const StoreScreen = () => {
+const StoreScreen = ({navigation}) => {
   return (
+    <>
     <View style={commonStyles.IosPadding}>
       <PH5>
         <TopHeader />
@@ -24,6 +26,8 @@ const StoreScreen = () => {
         <BottomContainer />
       </PH5>
     </View>
+     <BottomTabs navigation={navigation} />
+     </>
   );
 };
 

@@ -11,6 +11,7 @@ import {Spacer} from '../../../components/Spacer';
 import StoreItem from './Molecules/StoreItem';
 import {useNavigation} from '@react-navigation/core';
 import {verticalScale} from 'react-native-size-matters';
+import BottomTabs from '../../../components/BottomTabs';
 
 const CategoryData = [
   {id: 1, image: images.category1, txt: 'Category'},
@@ -27,61 +28,69 @@ const storeData = [
   {id: 5, image: images.item5, name: 'Store Name'},
   {id: 6, image: images.item6, name: 'Store Name'},
 ];
-const CategoriesScreen = () => {
-  const navigation = useNavigation();
+const CategoriesScreen = ({navigation}) => {
   const renderCategory = ({item, index}) => {
     return <CategoriesItem item={item} />;
   };
   const renderStore = ({item, index}) => {
     return (
       <View style={{flex: 1}}>
-        <StoreItem item={item} onPress={() => navigation.navigate('SearchStack',{screen:'StoreScreen'})} />
+        <StoreItem
+          item={item}
+          onPress={() =>
+            navigation.navigate('StoreScreen')
+          }
+        />
       </View>
     );
   };
   return (
-    <View style={commonStyles.IosPadding}>
-      <PH5>
-        <TopHeader />
-        <Spacer height={10} />
+    <>
+      <View style={commonStyles.IosPadding}>
+        <PH5>
+          <TopHeader />
+          <Spacer height={10} />
 
-        <CustomText
-          label="Select Category"
-          color={colors.primary}
-          fontSize={21}
-          fontFamily={Montserrat.SemiBold}
-        />
-        <View style={{height: '15%'}}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={CategoryData}
-            renderItem={renderCategory}
-            keyExtractor={item => item.id}
+          <CustomText
+            label="Select Category"
+            color={colors.primary}
+            fontSize={21}
+            fontFamily={Montserrat.SemiBold}
           />
-        </View>
+          <View style={{height: '15%'}}>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={CategoryData}
+              renderItem={renderCategory}
+              keyExtractor={item => item.id}
+            />
+          </View>
 
-        {/* <View style={{height:"20%",backgroundColor:"red"}}> */}
+          {/* <View style={{height:"20%",backgroundColor:"red"}}> */}
 
-        {/* <FlatList
+          {/* <FlatList
           data={storeData}
           renderItem={renderStore}
           keyExtractor={item => item.id}
         /> */}
-        {/* </View> */}
-        {/* <StoreItem/> */}
-        {/* <View style={{marginBottom:verticalScale(100)}}> */}
-        <FlatList
-          numColumns={2}
-          data={storeData}
-          renderItem={renderStore}
-          keyExtractor={item => item.id}
-        />
-        {/* </View> */}
+          {/* </View> */}
+          {/* <StoreItem/> */}
+          {/* <View style={{marginBottom:verticalScale(100)}}> */}
+          <FlatList
+            numColumns={2}
+            data={storeData}
+            renderItem={renderStore}
+            keyExtractor={item => item.id}
+          />
 
-        {/* <StoreItem /> */}
-      </PH5>
-    </View>
+          {/* </View> */}
+
+          {/* <StoreItem /> */}
+        </PH5>
+      </View>
+      <BottomTabs navigation={navigation} />
+    </>
   );
 };
 
