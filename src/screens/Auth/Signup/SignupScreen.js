@@ -7,6 +7,7 @@ import { images } from '../../../assets/images'
 import { verticalScale,moderateScale } from 'react-native-size-matters'
 import BodyItem from '../Login/Molecules/BodyItem'
 import { ValidateInput } from '../../../utils/InputValidate'
+
 const SignupScreen = ({navigation}) => {
 
   
