@@ -4,7 +4,6 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import AuthStack from './AuthStack/AuthStack';
 import MainStack from './MainStack/MainStack';
 import {StatusBar} from 'react-native';
-import SearchStack from './SearchStack';
 
 const RootNavigator = () => {
   const Stack = createStackNavigator();

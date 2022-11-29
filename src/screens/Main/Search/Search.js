@@ -1,23 +1,119 @@
-import { View, Text } from 'react-native'
-import React, { useState } from 'react'
-import { Spacer } from '../../../components/Spacer'
-import { SearchBar } from 'react-native-elements'
+import React, {useState, useEffect} from 'react';
 
-const Search = () => {
-    const [search, setSearch] = useState('')
-    updateSearch = (search) => {
-        setSearch({ search });
-      };
-  return (
-    <View>
-      <Spacer height={40}/>
-      <SearchBar
-        placeholder="Type Here..."
-        onChangeText={this.updateSearch}
-        value={search}
+import {SafeAreaView, Text, StyleSheet, View, FlatList} from 'react-native';
+import {SearchBar} from 'react-native-elements';
+import { colors } from '../../../utils/Colors';
+
+const App = () => {
+  const [search, setSearch] = useState('');
+  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [masterDataSource, setMasterDataSource] = useState([]);
+
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json())
+      .then(responseJson => {
+        setFilteredDataSource(responseJson);
+        setMasterDataSource(responseJson);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
+
+  const searchFilterFunction = text => {
+    // Check if searched text is not blank
+    if (text) {
+      // Inserted text is not blank
+      // Filter the masterDataSource
+      // Update FilteredDataSource
+      const newData = masterDataSource.filter(function (item) {
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredDataSource(newData);
+      setSearch(text);
+    } else {
+      // Inserted text is blank
+      // Update FilteredDataSource with masterDataSource
+      setFilteredDataSource(masterDataSource);
+      setSearch(text);
+    }
+  };
+
+  const ItemView = ({item}) => {
+    return (
+      // Flat List Item
+      <Text style={styles.itemStyle} onPress={() => getItem(item)}>
+        {item.id}
+        {'.'}
+        {item.title.toUpperCase()}
+      </Text>
+    );
+  };
+
+  const ItemSeparatorView = () => {
+    return (
+      // Flat List Item Separator
+      <View
+        style={{
+          height: 0.5,
+          width: '100%',
+          backgroundColor: '#C8C8C8',
+        }}
       />
-    </View>
-  )
-}
+    );
+  };
 
-export default Search
+  const getItem = item => {
+    // Function for click on an item
+    alert('Id : ' + item.id + ' Title : ' + item.title);
+  };
+
+  return (
+    <SafeAreaView style={{flex: 1,backgroundColor:colors.white}}>
+      <View style={styles.container}>
+        <SearchBar
+          round
+          searchIcon={{size: 30}}
+          onChangeText={text => searchFilterFunction(text)}
+          onClear={text => searchFilterFunction('')}
+          placeholder="Search Here..."
+          value={search}
+          inputStyle={{backgroundColor: colors.grey}}
+          containerStyle={{
+            backgroundColor: colors.white,
+            // height:100,
+            // borderWidth: 1,
+            borderRadius: 5,
+          }}
+          inputContainerStyle={{backgroundColor: colors.grey}}
+          placeholderTextColor={'#g5g5g5'}
+          lightTheme
+          cancelIcon
+        />
+
+        <FlatList
+          data={filteredDataSource}
+          keyExtractor={(item, index) => index.toString()}
+          ItemSeparatorComponent={ItemSeparatorView}
+          renderItem={ItemView}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+  },
+  itemStyle: {
+    padding: 10,
+  },
+});
+
+export default App;

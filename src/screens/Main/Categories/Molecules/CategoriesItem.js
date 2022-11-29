@@ -5,18 +5,15 @@ import {colors} from '../../../../utils/Colors';
 import {Montserrat} from '../../../../utils/Fonts';
 import {Spacer} from '../../../../components/Spacer';
 import commonStyles from '../../../../utils/CommonStyles';
-import {verticalScale} from 'react-native-size-matters';
+import {scale, verticalScale} from 'react-native-size-matters';
 import {images} from '../../../../assets/images';
 
 const CategoriesItem = ({item}) => {
-    console.log("ItemData",item)
+  console.log('ItemData', item);
   return (
     <TouchableOpacity activeOpacity={0.6} >
-
-      <View style={{flexWrap: 'wrap', marginRight: verticalScale(15)}}>
-        <View 
-        style={styles.circleImage}
-        >
+      <View style={{marginLeft: scale(16)}}>
+        <View style={styles.circleImage}>
           <Image style={commonStyles.img} source={item.image} />
         </View>
         <CustomText

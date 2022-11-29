@@ -23,7 +23,7 @@ const UserDetail = () => {
         <Image style={commonStyles.img} source={images.appIcon} />
         {/* <Text>cncn</Text> */}
       </View>
-      <Spacer height={10} />
+      {/* <Spacer height={10} />
       <View style={{flexDirection:"row"}}>
       <View style={{width:8,height:6,backgroundColor:colors.white,marginRight:8}}></View>
       <View style={{width:8,height:6,backgroundColor:colors.white,marginRight:8}}></View>
@@ -48,32 +48,32 @@ const UserDetail = () => {
       <View style={{width:8,height:6,backgroundColor:colors.white,marginRight:7}}></View>
 
 
-      </View>
+      </View> */}
 
       <Spacer height={20} />
 
 
 
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-        <View style={{alignSelf: 'flex-end'}}>
+      <View style={{}}>
+        <View style={{alignSelf: 'flex-start', }}>
           <CustomText
-            label="User Name"
+            label="Muhammad Zaid"
             alignSelf={'flex-end'}
             fontSize={15}
             fontFamily={Montserrat.SemiBold}
             color={colors.white}
           />
         </View>
-
-        <View style={{alignItems: 'flex-end'}}>
-          <CustomText
+      <Spacer height={16} />
+        <View style={{alignItems: 'flex-end',}}>
+          {/* <CustomText
             label="Valid till"
             fontSize={15}
             fontFamily={Montserrat.SemiBold}
             color={colors.white}
-          />
+          /> */}
           <CustomText
-            label="20/20"
+            label="Zaid@gmail.com"
             fontSize={15}
             fontFamily={Montserrat.SemiBold}
             color={colors.white}

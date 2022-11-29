@@ -16,14 +16,14 @@ const TopHeader = () => {
       <View style={{flexDirection: 'row'}}>
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => navigation.navigate('AddDesign')}
+          onPress={() => navigation.navigate('SignOutScreen')}
           style={styles.circleImage}>
           <Image style={commonStyles.img} source={images.profileImg} />
         </TouchableOpacity>
         <Spacer width={10} />
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => navigation.navigate('SearchStack')}
+          onPress={() => navigation.navigate('SearchScreen')}
           style={{...styles.circleImage, borderColor: colors.grey}}>
           {/* <Image style={commonStyles.img} source={images.profileImg} /> */}
           <Ionicons name="search" color={colors.primary} size={40} />
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: colors.primary,
     overflow: 'hidden',
-    marginTop: verticalScale(10),
+    marginTop: verticalScale(5),
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.grey1,

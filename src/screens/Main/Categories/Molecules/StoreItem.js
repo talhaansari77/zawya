@@ -66,7 +66,7 @@ export default StoreItem;
 const styles = StyleSheet.create({
   mainContainer: {
     width: Width / 2.4,
-    height: verticalScale(180),
+    height: verticalScale(190),
     flexDirection: 'row',
     borderRadius: 15,
     overflow: 'hidden',
