@@ -11,14 +11,14 @@ import commonStyles from '../../../../utils/CommonStyles';
 import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/core';
 
-const TopHeader = () => {
+const TopHeader = ({storeName}) => {
   const navigation = useNavigation();
   return (
     <View>
       <Spacer height={10} />
 
       <CustomText
-        label="Store Name"
+        label={storeName}
         color={colors.black}
         fontSize={18}
         alignSelf={'center'}

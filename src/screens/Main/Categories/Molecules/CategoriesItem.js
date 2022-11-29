@@ -8,11 +8,13 @@ import commonStyles from '../../../../utils/CommonStyles';
 import {scale, verticalScale} from 'react-native-size-matters';
 import {images} from '../../../../assets/images';
 
-const CategoriesItem = ({item}) => {
+const CategoriesItem = ({onCategory,item}) => {
   console.log('ItemData', item);
   return (
-    <TouchableOpacity activeOpacity={0.6} >
-      <View style={{marginLeft: scale(16)}}>
+    <TouchableOpacity
+    onPress={onCategory}
+     activeOpacity={0.6} >
+      <View style={{marginHorizontal:scale(15)}}>
         <View style={styles.circleImage}>
           <Image style={commonStyles.img} source={item.image} />
         </View>
@@ -20,6 +22,7 @@ const CategoriesItem = ({item}) => {
           label={item.txt}
           color={colors.black}
           fontSize={10}
+          alignSelf="center"
           fontFamily={Montserrat.Regular}
           marginTop={5}
         />

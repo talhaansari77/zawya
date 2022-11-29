@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, FlatList, Platform} from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import TopHeader from './Molecules/TopHeader';
 import commonStyles, {PH20, PH5} from '../../../utils/CommonStyles';
 import CategoriesItem from './Molecules/CategoriesItem';
@@ -13,13 +13,14 @@ import {useNavigation} from '@react-navigation/core';
 import {verticalScale} from 'react-native-size-matters';
 import BottomTabs from '../../../components/BottomTabs';
 import {ScrollView} from 'react-native-gesture-handler';
-
+import {getAuthId, getUser} from '../../../../services/FirebaseAuth';
+import {getSpecificeUser} from '../../../../services/FirebaseAuth';
+import Loader from '../../../utils/Loader';
 const CategoryData = [
-  {id: 1, image: images.category1, txt: 'Category'},
-  {id: 2, image: images.category2, txt: 'Category'},
-  {id: 3, image: images.category3, txt: 'Category'},
-  {id: 4, image: images.category4, txt: 'Category'},
-  {id: 5, image: images.category5, txt: 'Category'},
+  {id: 1, image: images.category1, txt: 'Restaurant'},
+  {id: 2, image: images.category2, txt: 'Food'},
+  {id: 3, image: images.category3, txt: 'Coffee'},
+  {id: 4, image: images.category4, txt: 'Perfume'},
 ];
 const storeData = [
   {id: 1, image: images.item1, name: 'Store Name'},
@@ -30,18 +31,81 @@ const storeData = [
   {id: 6, image: images.item6, name: 'Store Name'},
 ];
 const CategoriesScreen = ({navigation}) => {
+  const [authData, setAuthData] = useState([]);
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    onAuthData();
+  }, []);
+
+  console.log('AuthDataIs', authData);
+
+  const onFilterData = item => {
+    const responseData = authData.filter(data => {
+      return data.category == item.txt;
+    });
+
+    setAuthData(responseData);
+  };
+
+  const onAuthData = async () => {
+    setLoading(true)
+    try {
+      await getAuthId().then(id => {
+        getUser(setAuthData, id);
+      });
+
+      
+
+      setTimeout(() => {
+        setLoading(false)
+        
+      }, 2000);
+      
+    } catch (error) {
+      setLoading(false)
+      
+    }
+   
+  };
+
   const renderCategory = ({item, index}) => {
-    return <CategoriesItem item={item} />;
+    return (
+      <CategoriesItem
+        onCategory={() => {
+          onFilterData(item);
+
+          console.log('ItemData', index);
+        }}
+        item={item}
+      />
+    );
   };
   const renderStore = ({item, index}) => {
     return (
       <StoreItem
         item={item}
-        onPress={() => navigation.navigate('StoreScreen')}
+        onPress={() => navigation.navigate('StoreScreen',{userData:item})}
       />
     );
   };
+
+  const showEmptyData = () => {
+    return (
+      <View style={{width:"100%",height:"100%",alignItems:"center",justifyContent:"center",alignSelf:"center"}}>
+        <View style={{height:"10%"}}></View>
+        <CustomText
+          label="Nothing"
+          color={colors.primary}
+          fontSize={21}
+          fontFamily={Montserrat.SemiBold}
+        />
+      </View>
+    );
+  };
   return (
+    <>
+    
     <View style={{flex: 1}}>
       <PH20>
         <Spacer height={Platform.OS == 'ios' ? 40 : 5} />
@@ -69,15 +133,23 @@ const CategoriesScreen = ({navigation}) => {
           numColumns={2}
           columnWrapperStyle={{
             flex: 1,
-            justifyContent: 'space-evenly',
+            marginHorizontal:20
+
+            // justifyContent: 'space-evenly',
           }}
-          data={storeData}
+          data={authData}
           renderItem={renderStore}
           keyExtractor={item => item.id}
+          ListEmptyComponent={showEmptyData}
         />
       </ScrollView>
       <BottomTabs navigation={navigation} />
     </View>
+
+    <Loader loading={loading}/>
+
+  
+    </>
   );
 };
 

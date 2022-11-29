@@ -2,6 +2,9 @@ import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import storage from '@react-native-firebase/storage';
 import uuid from 'react-native-uuid';
+import auth from '@react-native-firebase/auth';
+
+
 
 
 
@@ -17,6 +20,63 @@ export const saveUser = async (authId, data) => {
     throw error;
   }
 };
+
+export const getSpecificeUser = async userId => {
+  try {
+    const user = await firestore().collection('users').doc(userId).get();
+    return user.data();
+  } catch (error) {
+    // console.log('getUser line 51', error);
+    throw error;
+  }
+};
+
+export const getUser = (setData) => {
+  const shop = [];
+ 
+
+  try {
+    firestore()
+      .collection("users")
+      .get()
+      .then((datingSnapshot) => {
+        datingSnapshot?.forEach((dating) => {
+          shop.push(dating.data());
+        });
+        setData(shop);
+      });
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const signout = async () => {
+  return auth().signOut();
+};
+
+// export const getUser = (setAuthData, authId,) => {
+//   try {
+//     return firestore().collection("users").onSnapshot((querySnap) => {
+//       const announcements = [];
+//       querySnap.forEach((announcement) => {
+//         let temp = announcement.data();
+//         // console.log("tempData",temp)
+//         // if (temp.id != authId) {
+//         //   announcements.put(temp)
+
+//         // }
+
+//         setAuthData(announcement.data());
+
+
+//       });
+
+
+//     });
+//   } catch (error) {
+//     console.log("user error", error);
+//   }
+// };
 
 export const uploadImage = async (uri, path) => {
     console.log("ImagrAndPath",uri,path)

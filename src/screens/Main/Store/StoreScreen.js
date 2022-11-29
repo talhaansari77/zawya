@@ -11,16 +11,18 @@ import ImageContainer from './Molecules/ImageContainer';
 import BottomContainer from './Molecules/BottomContainer';
 import BottomTabs from '../../../components/BottomTabs';
 
-const StoreScreen = ({navigation}) => {
+const StoreScreen = ({navigation,route}) => {
+
+  console.log("RotesData",route?.params?.userData)
   return (
     <>
     <View style={commonStyles.IosPadding}>
       <PH5>
-        <TopHeader />
+        <TopHeader storeName={route?.params?.userData?.businessName} />
         <Spacer height={15} />
         <ProgressContainer />
         <Spacer height={15} />
-        <ImageContainer />
+        <ImageContainer storeImages={route?.params?.userData?.images} />
         <Spacer height={3} />
 
         <BottomContainer />

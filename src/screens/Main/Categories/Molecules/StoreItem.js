@@ -6,7 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React,{useState} from 'react';
 import {images} from '../../../../assets/images';
 import commonStyles from '../../../../utils/CommonStyles';
 import CustomText from '../../../../components/CustomText';
@@ -18,6 +18,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const Width = Dimensions.get('window').width;
 const StoreItem = ({item, onPress}) => {
+  const [heart, setHeart] = useState(false)
   console.log('ItemStoreData', item);
 
   return (
@@ -26,7 +27,7 @@ const StoreItem = ({item, onPress}) => {
       activeOpacity={0.7}
       style={styles.mainContainer}>
       <Image
-        source={item.image}
+        source={{uri:item.images.image1}}
         // resizeMode="contain"
         style={{width: '100%', height: '100%'}}
       />
@@ -41,20 +42,33 @@ const StoreItem = ({item, onPress}) => {
             alignItems: 'center',
             justifyContent: 'space-between',
           }}>
-          <CustomText
-            label={item.name}
+            <View style={{width:"80%"}}>
+            <CustomText
+            label={item.businessName}
             color={colors.white}
+            numberOfLines={1}
+            
             fontSize={15}
             fontWeight="400"
             fontFamily={Roboto.Regular300}
           />
-          <View style={{marginRight: verticalScale(15)}}>
+
+            </View>
+       
+          <TouchableOpacity 
+          activeOpacity={0.6}
+          onPress={()=>{
+            setHeart(!heart)
+
+          }}
+          style={{marginRight: verticalScale(10)}}
+          >
             <AntDesign
-              name="hearto"
+              name={heart?"heart":"hearto"}
               size={moderateScale(20)}
-              color={colors.primary}
+              color={heart? colors.primary: colors.primary}
             />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableOpacity>
@@ -71,6 +85,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     overflow: 'hidden',
     marginBottom: verticalScale(20),
+    marginRight:20,
     // paddingRight:
   },
   cover: {

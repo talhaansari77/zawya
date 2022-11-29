@@ -6,8 +6,10 @@ import {PH20} from '../../../utils/CommonStyles';
 import CustomButton from '../../../components/CustomButton';
 import {verticalScale} from 'react-native-size-matters';
 import UserDetail from './Molecules/UserDetail';
+import {signout} from '../../../../services/FirebaseAuth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const SignOutScreen = () => {
+const SignOutScreen = ({navigation}) => {
   return (
     <View style={commonStyles.IosPadding}>
       <PH20>
@@ -15,6 +17,17 @@ const SignOutScreen = () => {
         <CustomButton
           title="Sign out"
           fontSize={18}
+          onPress={async () => {
+            await AsyncStorage.removeItem('userAuth');
+
+            signout();
+
+            navigation.reset({
+              index: 0,
+              routes: [{name: 'AuthStack'}],
+              // screen:'Login'
+            });
+          }}
           height={verticalScale(47)}
           width={'65%'}
         />
