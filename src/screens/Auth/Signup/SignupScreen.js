@@ -7,6 +7,7 @@ import {images} from '../../../assets/images';
 import {verticalScale, moderateScale} from 'react-native-size-matters';
 import BodyItem from '../Login/Molecules/BodyItem';
 import {ValidateInput} from '../../../utils/InputValidate';
+import BodyContainer from './Molecules/BodyContainer';
 
 const SignupScreen = ({navigation}) => {
   return (
@@ -25,10 +26,9 @@ const SignupScreen = ({navigation}) => {
         </View>
         <Spacer height={25} />
 
-        <BodyItem
-          btnLabel={'Sign Up'}
-          topLabel={'Sign Up'}
-          signup
+        <BodyContainer
+    
+          
           onPress={() => {
             navigation.navigate('LoginScreen');
           }}

@@ -10,7 +10,7 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {Spacer} from '../../../../components/Spacer';
 import {OpenImageLib} from '../../../../components/imageSelector';
 
-const DesignForm = () => {
+const DesignForm = ({designState, setDesignState, images, setImages}) => {
   const [selected, setSelected] = useState('');
   const [banner, setBanner] = useState('');
 
@@ -22,6 +22,12 @@ const DesignForm = () => {
     {key: '7', value: 'Drinks'},
   ];
 
+  // businessName:"",
+  // headline:"",
+  // action:"",
+  // template:"",
+  // category:""
+
   const FormList = [
     {
       id: 1,
@@ -32,6 +38,10 @@ const DesignForm = () => {
           backgroundColor={colors.grey1}
           placeholderTextColor={colors.black}
           height={55}
+          onChangeText={nam => {
+            setDesignState({...designState, businessName: nam});
+          }}
+          value={designState.businessName}
           borderRadius={1}
           shadowOpacity={0.1}
         />
@@ -46,6 +56,10 @@ const DesignForm = () => {
           backgroundColor={colors.grey1}
           placeholderTextColor={colors.black}
           height={55}
+          value={designState.headline}
+          onChangeText={nam => {
+            setDesignState({...designState, headline: nam});
+          }}
           borderRadius={1}
           shadowRadius={0}
           shadowOpacity={0.1}
@@ -114,7 +128,7 @@ const DesignForm = () => {
         </View>
       ))}
       <SelectList
-        setSelected={val => setSelected(val)}
+        setSelected={val => setDesignState({...designState, action: val})}
         data={data}
         save="value"
         placeholder="Get Now"
@@ -153,20 +167,27 @@ const DesignForm = () => {
           width: '100%',
           padding: verticalScale(banner ? 0 : 25),
           borderWidth: 1,
+          height: verticalScale(110),
           borderColor: colors.grey,
         }}>
-        <TouchableOpacity onPress={() => OpenImageLib(setBanner)}>
+        <TouchableOpacity
+          onPress={() => {
+            OpenImageLib().then(img => {
+              setImages({...images, image1: img});
+            });
+          }}>
           <View style={{alignItems: 'center'}}>
             <Image
-              source={banner ? {uri: banner} : icons.uploadImage}
-              resizeMode={'contain'}
+              source={images?.image1 ? {uri: images?.image1} : icons.uploadImage}
+              resizeMode={images?.image1 ? 'cover' : 'contain'}
               style={{
-                height: verticalScale(banner ? 100 : 30),
+                // height: verticalScale(banner ? "100%" : 30),
+                height: images?.image1 ? '100%' : verticalScale(30),
                 width: '100%',
-                marginBottom: banner ? 0 : 5,
+                marginBottom: images?.image1 ? 0 : 5,
               }}
             />
-            {banner ? (
+            {images?.image1 ? (
               <></>
             ) : (
               <>

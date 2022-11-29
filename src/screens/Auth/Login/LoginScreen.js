@@ -24,8 +24,7 @@ const LoginScreen = ({navigation}) => {
         <Spacer height={25} />
 
         <BodyItem
-          btnLabel={'Log In'}
-          topLabel={'Log In'}
+        
           onPress={() => {
             navigation.navigate('SignupScreen');
           }}

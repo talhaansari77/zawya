@@ -8,24 +8,25 @@ import CustomTextInput from '../../../../components/CustomTextInput';
 import {Spacer} from '../../../../components/Spacer';
 import {icons} from '../../../../assets/icons';
 import CustomButton from '../../../../components/CustomButton';
-import AuthOption from './AuthOption';
 import {useNavigation} from '@react-navigation/core';
 import {ValidateInput} from '../../../../utils/InputValidate';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AuthOption from '../../Login/Molecules/AuthOption';
 import auth from '@react-native-firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const BodyItem = ({...props}) => {
+const BodyContainer = ({...props}) => {
   const navigation = useNavigation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const [submitError, setSubmitError] = useState({
     emailError: '',
     passwordError: '',
   });
 
-  const onHandelSubmit = async () => {
+  const onHandelSubmit =async () => {
+    console.log('hcvg');
     const response = ValidateInput(
       email,
       password,
@@ -35,43 +36,37 @@ const BodyItem = ({...props}) => {
 
     if (response) {
       setLoading(true);
-
-      //  login with email and password
       try {
-        const userCredentials = await auth().signInWithEmailAndPassword(
+        // create user with email and password
+        const userCredentials = await auth().createUserWithEmailAndPassword(
           email.trim(),
           password.trim(),
         );
-        if (userCredentials.user.uid) {
+
+        console.log("AuthData",userCredentials)
+        if (userCredentials) {
+          // save user id in  AsyncStorag
           AsyncStorage.setItem('userAuth', userCredentials.user.uid);
-
-          // save user data
-          // await saveUser(userCredentials.user.uid, {fcmToken: newFcmToken});
-
+          setLoading(false);
           navigation.reset({
             index: 0,
             routes: [{name: 'MainStack'}],
           });
         }
       } catch (error) {
+        console.log('onSubmitRegister error', error);
+        setSubmitError({
+          ...submitError,
+          emailError: 'The email address is already in use by another account',
+        });
         setLoading(false);
-        console.log('cjdbjd', error);
-        if (
-          error.code == 'auth/wrong-password' ||
-          error.code == 'auth/user-not-found'
-        ) {
-          return setSubmitError({
-            ...submitError,
-            passwordError: 'Invalid Email and Password ',
-          });
-        }
       }
     }
   };
   return (
     <View style={styles.mainContainer}>
       <CustomText
-        label={'Log In'}
+        label={'Sign Up'}
         alignSelf="center"
         fontSize={20}
         color={colors.primary}
@@ -81,7 +76,7 @@ const BodyItem = ({...props}) => {
 
       <CustomTextInput
         value={email}
-        placeholder={'email'}
+        placeholder={'Email'}
         placeholderTextColor={colors.black}
         leftIcon={icons.userName}
         error={submitError.emailError}
@@ -94,8 +89,7 @@ const BodyItem = ({...props}) => {
       <Spacer height={30} />
       <CustomTextInput
         value={password}
-        secureTextEntry={true}
-        placeholder={'password'}
+        placeholder={'Password'}
         placeholderTextColor={colors.black}
         onChangeText={em => {
           setPassword(em.trim());
@@ -110,8 +104,9 @@ const BodyItem = ({...props}) => {
       <Spacer height={30} />
       <CustomButton
         // title="Log In"
-        title={'Log In'}
+        title={'Sign Up'}
         loading={loading}
+
         width={'95%'}
         onPress={onHandelSubmit}
       />
@@ -122,7 +117,7 @@ const BodyItem = ({...props}) => {
           marginTop: verticalScale(10),
         }}>
         <CustomText
-          label={"Don't have and account "}
+          label={'Already have an account? '}
           alignSelf="center"
           fontSize={10}
           color={colors.black}
@@ -130,7 +125,7 @@ const BodyItem = ({...props}) => {
         />
         <TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
           <CustomText
-            label={'Sign Up'}
+            label={'Log In '}
             alignSelf="center"
             fontSize={10}
             color={colors.primary}
@@ -146,7 +141,7 @@ const BodyItem = ({...props}) => {
   );
 };
 
-export default BodyItem;
+export default BodyContainer;
 
 const styles = ScaledSheet.create({
   mainContainer: {

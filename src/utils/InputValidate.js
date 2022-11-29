@@ -1,16 +1,17 @@
 import {validateEmail} from './Validate';
 export const ValidateInput = (
-  userName,
-  cardNumber,
+  email,
+  password,
   submitError,
   setSubmitError,
 ) => {
-  if (!userName) {
-    return setSubmitError({...submitError, userNameError: 'User name is Required'});
-  } else if (!cardNumber) {
+ 
+  if (!email) {
+    return setSubmitError({...submitError, emailError: 'email is Required'});
+  } else if (!password) {
     return setSubmitError({
       ...submitError,
-      cardNumberError: 'Card number is Required',
+      passwordError: 'password is Required',
     });
   }
 
