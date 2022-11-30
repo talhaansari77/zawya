@@ -20,8 +20,9 @@ export const saveUser = async (authId, data) => {
     throw error;
   }
 };
-
 export const getSpecificeUser = async userId => {
+
+  console.log("UserId",userId)
   try {
     const user = await firestore().collection('users').doc(userId).get();
     return user.data();
@@ -30,11 +31,8 @@ export const getSpecificeUser = async userId => {
     throw error;
   }
 };
-
 export const getUser = (setData) => {
   const shop = [];
- 
-
   try {
     firestore()
       .collection("users")

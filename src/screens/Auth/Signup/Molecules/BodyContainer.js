@@ -47,6 +47,8 @@ const BodyContainer = ({...props}) => {
         if (userCredentials) {
           // save user id in  AsyncStorag
           AsyncStorage.setItem('userAuth', userCredentials.user.uid);
+          AsyncStorage.setItem('userEmail', email);
+
           setLoading(false);
           navigation.reset({
             index: 0,

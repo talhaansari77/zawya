@@ -1,26 +1,30 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React, { useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import commonStyles from '../../../utils/CommonStyles';
 import {Spacer} from '../../../components/Spacer';
 import {PH20} from '../../../utils/CommonStyles';
 import CustomButton from '../../../components/CustomButton';
 import {verticalScale} from 'react-native-size-matters';
 import UserDetail from './Molecules/UserDetail';
-import {getAuthId, getSpecificeUser, getUser, signout} from '../../../../services/FirebaseAuth';
+import {signout} from '../../../../services/FirebaseAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getAuthId} from '../../../../services/FirebaseAuth';
+import {getSpecificeUser} from '../../../../services/FirebaseAuth';
 
 const SignOutScreen = ({navigation}) => {
-  // useEffect(async () => {
-  //   try {
-  //     await getAuthId().then(id => {
-  //       let user = getSpecificeUser(id);
-  //       console.log('id==>' + id);
-  //       console.log('user==>' + user.email);
-  //     });
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // }, []);
+  const [AuthData, setAuthData] = useState(AuthData);
+  useEffect(() => {
+    getAuthData();
+  }, []);
+
+
+  const getAuthData = async () => {
+
+    
+    const responseData=await AsyncStorage.getItem("userEmail")
+    setAuthData(responseData)
+  
+  };
 
   return (
     <View style={commonStyles.IosPadding}>
@@ -31,13 +35,13 @@ const SignOutScreen = ({navigation}) => {
           fontSize={18}
           onPress={async () => {
             await AsyncStorage.removeItem('userAuth');
+            AsyncStorage.removeItem('userEmail');
 
             signout();
 
             navigation.reset({
               index: 0,
               routes: [{name: 'AuthStack'}],
-              // screen:'Login'
             });
           }}
           height={verticalScale(47)}
@@ -46,7 +50,7 @@ const SignOutScreen = ({navigation}) => {
 
         <Spacer height={100} />
 
-        <UserDetail />
+        <UserDetail AuthData={AuthData} />
       </PH20>
     </View>
   );

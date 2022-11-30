@@ -44,6 +44,9 @@ const BodyItem = ({...props}) => {
         );
         if (userCredentials.user.uid) {
           AsyncStorage.setItem('userAuth', userCredentials.user.uid);
+          AsyncStorage.setItem('userEmail', email);
+
+
 
           // save user data
           // await saveUser(userCredentials.user.uid, {fcmToken: newFcmToken});
