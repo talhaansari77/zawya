@@ -8,7 +8,7 @@ import CustomText from '../../../../components/CustomText';
 import {Spacer} from '../../../../components/Spacer';
 import {Montserrat} from '../../../../utils/Fonts';
 
-const UserDetail = () => {
+const UserDetail = ({AuthData}) => {
   return (
     <View
       style={{
@@ -51,13 +51,10 @@ const UserDetail = () => {
       </View> */}
 
       <Spacer height={20} />
-
-
-
       <View style={{}}>
         <View style={{alignSelf: 'flex-start', }}>
           <CustomText
-            label="Muhammad Zaid"
+            label={AuthData?.split("@gmail.com")}
             alignSelf={'flex-end'}
             fontSize={15}
             fontFamily={Montserrat.SemiBold}
@@ -66,14 +63,9 @@ const UserDetail = () => {
         </View>
       <Spacer height={16} />
         <View style={{alignItems: 'flex-end',}}>
-          {/* <CustomText
-            label="Valid till"
-            fontSize={15}
-            fontFamily={Montserrat.SemiBold}
-            color={colors.white}
-          /> */}
+         
           <CustomText
-            label="Zaid@gmail.com"
+            label={AuthData}
             fontSize={15}
             fontFamily={Montserrat.SemiBold}
             color={colors.white}
