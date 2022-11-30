@@ -223,7 +223,7 @@ const DesignFormBottom = ({
           onPress={() => {
             onHandleSave();
           }}
-          title={'Next'}
+          title={'Upload'}
           width={120}
           height={55}
         />

@@ -11,7 +11,7 @@ import {saveUser} from '../../../../services/FirebaseAuth';
 import {uploadImage} from '../../../../services/FirebaseAuth';
 import Loader from '../../../utils/Loader';
 
-const AddDesignScreen = () => {
+const AddDesignScreen = ({navigation}) => {
   const [images, setImages] = useState(imageTemplate);
 
   const [authId, setauthId] = useState('');
@@ -69,6 +69,7 @@ const AddDesignScreen = () => {
         }, 2000);
 
         console.log('dataSave');
+        navigation.navigate('CategoriesScreen')
         // navigation.reset({
         //   index: 0,
         //   routes: [{name: 'MainStack'}],

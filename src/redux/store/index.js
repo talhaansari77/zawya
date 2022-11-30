@@ -2,9 +2,10 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 // import thunkMiddleware from "redux-thunk";
 
 import authReducer from '../reducers';
-import myCoinReducer from '../reducers/MyCoinReducer';
+import myFavoriteReducer from '../reducers/MyFavoriteReducer';
+
 const rootReducer = combineReducers({
-  myCoinReducer: myCoinReducer,
+  myFavoriteReducer: myFavoriteReducer,
 });
 const store = createStore(rootReducer, applyMiddleware());
 

@@ -4,5 +4,6 @@ const constants = {
   LOGOUT: "LOGOUT",
   SETTING:"SETTING",
   ADD_COIN:"ADD_COIN",
+  ADD_FAVORITE:"ADD_FAVORITE",
 };
 export default constants;

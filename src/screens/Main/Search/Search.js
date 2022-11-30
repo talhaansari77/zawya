@@ -2,108 +2,124 @@ import React, {useState, useEffect} from 'react';
 
 import {SafeAreaView, Text, StyleSheet, View, FlatList} from 'react-native';
 import {SearchBar} from 'react-native-elements';
-import { colors } from '../../../utils/Colors';
+import {getAuthId, getUser} from '../../../../services/FirebaseAuth';
+import CustomText from '../../../components/CustomText';
+import {Spacer} from '../../../components/Spacer';
+import {colors} from '../../../utils/Colors';
+import {Montserrat} from '../../../utils/Fonts';
+import Loader from '../../../utils/Loader';
+import StoreItem from '../Categories/Molecules/StoreItem';
 
-const App = () => {
+const App = ({navigation,route}) => {
   const [search, setSearch] = useState('');
-  const [filteredDataSource, setFilteredDataSource] = useState([]);
-  const [masterDataSource, setMasterDataSource] = useState([]);
+  const [authData, setAuthData] = useState(route?.params?.authData);
+  const [filerData, SetFilerData] = useState(route?.params?.authData);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json())
-      .then(responseJson => {
-        setFilteredDataSource(responseJson);
-        setMasterDataSource(responseJson);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, []);
-
-  const searchFilterFunction = text => {
-    // Check if searched text is not blank
-    if (text) {
-      // Inserted text is not blank
-      // Filter the masterDataSource
-      // Update FilteredDataSource
-      const newData = masterDataSource.filter(function (item) {
-        const itemData = item.title
-          ? item.title.toUpperCase()
-          : ''.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setFilteredDataSource(newData);
-      setSearch(text);
-    } else {
-      // Inserted text is blank
-      // Update FilteredDataSource with masterDataSource
-      setFilteredDataSource(masterDataSource);
-      setSearch(text);
-    }
-  };
-
-  const ItemView = ({item}) => {
+  const renderStore = ({item, index}) => {
     return (
-      // Flat List Item
-      <Text style={styles.itemStyle} onPress={() => getItem(item)}>
-        {item.id}
-        {'.'}
-        {item.title.toUpperCase()}
-      </Text>
-    );
-  };
-
-  const ItemSeparatorView = () => {
-    return (
-      // Flat List Item Separator
-      <View
-        style={{
-          height: 0.5,
-          width: '100%',
-          backgroundColor: '#C8C8C8',
-        }}
+      <StoreItem
+        item={item}
+        onPress={() => navigation.navigate('StoreScreen', {userData: item})}
       />
     );
   };
+  const showEmptyData = () => {
+    return (
+      <View
+        style={{
+          width: '100%',
+          height: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+          alignSelf: 'center',
+        }}>
+        <View style={{height: '10%'}}></View>
+        <CustomText
+          label="Nothing"
+          color={colors.primary}
+          fontSize={21}
+          fontFamily={Montserrat.SemiBold}
+        />
+      </View>
+    );
+  };
+  // const onAuthData = async () => {
+  //   setLoading(true);
+  //   try {
+  //     await getAuthId().then(id => {
+  //       getUser(setAuthData, id);
+  //       getUser(SetFilerData, id);
+  //     });
 
-  const getItem = item => {
-    // Function for click on an item
-    alert('Id : ' + item.id + ' Title : ' + item.title);
+  //     setTimeout(() => {
+  //       setLoading(false);
+  //     }, 2000);
+  //   } catch (error) {
+  //     setLoading(false);
+  //   }
+  // };
+  // useEffect(() => {
+  //   onAuthData();
+  // }, []);
+
+  const onFilterData = text => {
+    if (text) {
+      const responseData = authData.filter(data => {
+        return data.businessName.toUpperCase().includes(text.toUpperCase());
+      });
+      SetFilerData(responseData);
+      setSearch(text);
+    } else {
+      SetFilerData(authData);
+      setSearch(text);
+    }
+
+    // setAuthData(responseData);
+    // SetFilerData(responseData);
   };
 
   return (
-    <SafeAreaView style={{flex: 1,backgroundColor:colors.white}}>
-      <View style={styles.container}>
-        <SearchBar
-          round
-          searchIcon={{size: 30}}
-          onChangeText={text => searchFilterFunction(text)}
-          onClear={text => searchFilterFunction('')}
-          placeholder="Search Here..."
-          value={search}
-          inputStyle={{backgroundColor: colors.grey}}
-          containerStyle={{
-            backgroundColor: colors.white,
-            // height:100,
-            // borderWidth: 1,
-            borderRadius: 5,
-          }}
-          inputContainerStyle={{backgroundColor: colors.grey}}
-          placeholderTextColor={'#g5g5g5'}
-          lightTheme
-          cancelIcon
-        />
+    <>
+      <SafeAreaView style={{flex: 1, backgroundColor: colors.white}}>
+        <View style={styles.container}>
+          <SearchBar
+            round
+            searchIcon={{size: 30}}
+            onChangeText={text => onFilterData(text)}
+            onClear={text => onFilterData('')}
+            placeholder="Search Here..."
+            value={search}
+            inputStyle={{backgroundColor: colors.grey}}
+            containerStyle={{
+              backgroundColor: colors.white,
+              // height:100,
+              // borderWidth: 1,
+              borderRadius: 5,
+            }}
+            inputContainerStyle={{backgroundColor: colors.grey}}
+            placeholderTextColor={'#g5g5g5'}
+            lightTheme
+            cancelIcon
+          />
+          <Spacer height={20} />
+          <FlatList
+            numColumns={2}
+            columnWrapperStyle={{
+              flex: 1,
+              marginHorizontal: 20,
 
-        <FlatList
-          data={filteredDataSource}
-          keyExtractor={(item, index) => index.toString()}
-          ItemSeparatorComponent={ItemSeparatorView}
-          renderItem={ItemView}
-        />
-      </View>
-    </SafeAreaView>
+              // justifyContent: 'space-evenly',
+            }}
+            data={filerData}
+            renderItem={renderStore}
+            keyExtractor={item => item.id}
+            ListEmptyComponent={showEmptyData}
+          />
+        </View>
+      </SafeAreaView>
+      <Loader loading={loading} />
+    </>
   );
 };
 

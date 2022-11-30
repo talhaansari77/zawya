@@ -30,9 +30,13 @@ const storeData = [
   {id: 5, image: images.item5, name: 'Store Name'},
   {id: 6, image: images.item6, name: 'Store Name'},
 ];
+
 const CategoriesScreen = ({navigation}) => {
   const [authData, setAuthData] = useState([]);
-  const [loading, setLoading] = useState(false)
+  const [filerData, SetFilerData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  
 
   useEffect(() => {
     onAuthData();
@@ -45,28 +49,24 @@ const CategoriesScreen = ({navigation}) => {
       return data.category == item.txt;
     });
 
-    setAuthData(responseData);
+    // setAuthData(responseData);
+    SetFilerData(responseData);
   };
 
   const onAuthData = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       await getAuthId().then(id => {
         getUser(setAuthData, id);
+        getUser(SetFilerData, id);
       });
 
-      
-
       setTimeout(() => {
-        setLoading(false)
-        
+        setLoading(false);
       }, 2000);
-      
     } catch (error) {
-      setLoading(false)
-      
+      setLoading(false);
     }
-   
   };
 
   const renderCategory = ({item, index}) => {
@@ -85,15 +85,22 @@ const CategoriesScreen = ({navigation}) => {
     return (
       <StoreItem
         item={item}
-        onPress={() => navigation.navigate('StoreScreen',{userData:item})}
+        onPress={() => navigation.navigate('StoreScreen', {userData: item})}
       />
     );
   };
 
   const showEmptyData = () => {
     return (
-      <View style={{width:"100%",height:"100%",alignItems:"center",justifyContent:"center",alignSelf:"center"}}>
-        <View style={{height:"10%"}}></View>
+      <View
+        style={{
+          width: '100%',
+          height: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+          alignSelf: 'center',
+        }}>
+        <View style={{height: '10%'}}></View>
         <CustomText
           label="Nothing"
           color={colors.primary}
@@ -105,50 +112,47 @@ const CategoriesScreen = ({navigation}) => {
   };
   return (
     <>
-    
-    <View style={{flex: 1}}>
-      <PH20>
-        <Spacer height={Platform.OS == 'ios' ? 40 : 5} />
-        <TopHeader />
-        <Spacer height={10} />
-      </PH20>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={{flex: 1}}>
         <PH20>
-          <CustomText
-            label="Select Category"
-            color={colors.primary}
-            fontSize={21}
-            fontFamily={Montserrat.SemiBold}
-          />
+          <Spacer height={Platform.OS == 'ios' ? 40 : 5} />
+          <TopHeader authData={authData} />
+          <Spacer height={10} />
         </PH20>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={CategoryData}
-          renderItem={renderCategory}
-          keyExtractor={item => item.id}
-        />
-        <Spacer height={20} />
-        <FlatList
-          numColumns={2}
-          columnWrapperStyle={{
-            flex: 1,
-            marginHorizontal:20
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <PH20>
+            <CustomText
+              label="Select Category"
+              color={colors.primary}
+              fontSize={21}
+              fontFamily={Montserrat.SemiBold}
+            />
+          </PH20>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={CategoryData}
+            renderItem={renderCategory}
+            keyExtractor={item => item.id}
+          />
+          <Spacer height={20} />
+          <FlatList
+            numColumns={2}
+            columnWrapperStyle={{
+              flex: 1,
+              marginHorizontal: 20,
 
-            // justifyContent: 'space-evenly',
-          }}
-          data={authData}
-          renderItem={renderStore}
-          keyExtractor={item => item.id}
-          ListEmptyComponent={showEmptyData}
-        />
-      </ScrollView>
-      <BottomTabs navigation={navigation} />
-    </View>
+              // justifyContent: 'space-evenly',
+            }}
+            data={filerData}
+            renderItem={renderStore}
+            keyExtractor={item => item.id}
+            ListEmptyComponent={showEmptyData}
+          />
+        </ScrollView>
+        <BottomTabs navigation={navigation} />
+      </View>
 
-    <Loader loading={loading}/>
-
-  
+      <Loader loading={loading} />
     </>
   );
 };

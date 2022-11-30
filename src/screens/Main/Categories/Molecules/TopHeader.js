@@ -9,7 +9,7 @@ import {images} from '../../../../assets/images';
 import {useNavigation} from '@react-navigation/core';
 import {Spacer} from '../../../../components/Spacer';
 
-const TopHeader = () => {
+const TopHeader = ({authData}) => {
   const navigation = useNavigation();
   return (
     <View style={styles.mainContainer}>
@@ -23,14 +23,14 @@ const TopHeader = () => {
         <Spacer width={10} />
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() => navigation.navigate('SearchScreen')}
+          onPress={() => navigation.navigate('SearchScreen',{authData})}
           style={{...styles.circleImage, borderColor: colors.grey}}>
           {/* <Image style={commonStyles.img} source={images.profileImg} /> */}
           <Ionicons name="search" color={colors.primary} size={40} />
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity activeOpacity={0.7} onPress={() => {}}>
+      <TouchableOpacity activeOpacity={0.7} onPress={() => navigation.navigate('FavoritesScreen')}>
         <AntDesign
           name="heart"
           color={colors.primary}

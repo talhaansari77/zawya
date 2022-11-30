@@ -1,15 +1,27 @@
 import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import commonStyles from '../../../utils/CommonStyles';
 import {Spacer} from '../../../components/Spacer';
 import {PH20} from '../../../utils/CommonStyles';
 import CustomButton from '../../../components/CustomButton';
 import {verticalScale} from 'react-native-size-matters';
 import UserDetail from './Molecules/UserDetail';
-import {signout} from '../../../../services/FirebaseAuth';
+import {getAuthId, getSpecificeUser, getUser, signout} from '../../../../services/FirebaseAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignOutScreen = ({navigation}) => {
+  // useEffect(async () => {
+  //   try {
+  //     await getAuthId().then(id => {
+  //       let user = getSpecificeUser(id);
+  //       console.log('id==>' + id);
+  //       console.log('user==>' + user.email);
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }, []);
+
   return (
     <View style={commonStyles.IosPadding}>
       <PH20>
