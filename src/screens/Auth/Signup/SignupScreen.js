@@ -27,8 +27,6 @@ const SignupScreen = ({navigation}) => {
         <Spacer height={25} />
 
         <BodyContainer
-    
-          
           onPress={() => {
             navigation.navigate('LoginScreen');
           }}

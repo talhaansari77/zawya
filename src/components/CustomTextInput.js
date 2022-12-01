@@ -108,7 +108,7 @@ const CustomTextInput = ({
           ]}
           onChangeText={props.onChangeText}
           value={props.value}
-          numberOfLines={props.numberOfLines}
+          // numberOfLines={props.numberOfLines}
           keyboardType={props.keyboardType}
           autoCapitalize="none"
           multiline={props.multiline}

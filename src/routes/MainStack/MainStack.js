@@ -14,6 +14,7 @@ import {images} from '../../assets/images';
 import {icons} from '../../assets/icons';
 import StoreScreen from '../../screens/Main/Store/StoreScreen';
 import Search from '../../screens/Main/Search';
+import Favorites from '../../screens/Main/Favorites';
 
 const MainStack = () => {
   const Tab = createBottomTabNavigator();
@@ -23,12 +24,13 @@ const MainStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
-      // initialRouteName={'SignupScreen'}
+      // initialRouteName={'FavoritesScreen'}
       >
       <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
       <Stack.Screen name="SearchScreen" component={Search} />
       <Stack.Screen name="StoreScreen" component={StoreScreen} />
       <Stack.Screen name="AddDesignScreen" component={AddDesignScreen} />
+      <Stack.Screen name="FavoritesScreen" component={Favorites} />
       <Stack.Screen name="SignOutScreen" component={SignOutScreen} />
       {/* <Stack.Screen name="AddDesignScreen" component={AddDesignScreen} /> */}
     </Stack.Navigator>

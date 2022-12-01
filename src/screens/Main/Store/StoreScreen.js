@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import commonStyles, {PH10, PH5} from '../../../utils/CommonStyles';
+import {Modal, Platform, StyleSheet, Text, View} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import commonStyles, {PH10, PH20, PH5} from '../../../utils/CommonStyles';
 import {colors} from '../../../utils/Colors';
 import CustomText from '../../../components/CustomText';
 import {Roboto} from '../../../utils/Fonts';
@@ -11,25 +11,42 @@ import ImageContainer from './Molecules/ImageContainer';
 import BottomContainer from './Molecules/BottomContainer';
 import BottomTabs from '../../../components/BottomTabs';
 
-const StoreScreen = ({navigation,route}) => {
-
-  console.log("RotesData",route?.params?.userData)
+const StoreScreen = ({navigation, route}) => {
+  const [visible, setVisible] = useState(false);
+  console.log('RotesData', route?.params?.userData);
+  useEffect(() => {
+    setTimeout(() => {
+      setVisible(true)
+    }, 2000);
+  }, [])
+  
   return (
     <>
-    <View style={commonStyles.IosPadding}>
-      <PH5>
-        <TopHeader storeName={route?.params?.userData?.businessName} />
-        <Spacer height={15} />
-        <ProgressContainer />
-        <Spacer height={15} />
-        <ImageContainer storeImages={route?.params?.userData?.images} />
+      <View style={{flex: 1}}>
+        <Spacer height={Platform.OS === 'ios' ? 40 : 5} />
+        {/* <PH20>
+          <TopHeader storeName={route?.params?.userData?.businessName} storeImages={route?.params?.userData?.images} />
+          <Spacer height={15} />
+          <ProgressContainer storeImages={route?.params?.userData?.images} />
+        </PH20> */}
+        {/* <Spacer height={15} /> */}
+        <ImageContainer
+          storeImages={route?.params?.userData?.images}
+          storeName={route?.params?.userData?.businessName}
+        />
         <Spacer height={3} />
-
-        <BottomContainer />
-      </PH5>
-    </View>
-     <BottomTabs navigation={navigation} />
-     </>
+        <Modal
+          animationType="slide"
+          visible={visible}
+          onRequestClose={() => setVisible(false)}
+          transparent={true}>
+         
+            <BottomContainer setVisible={setVisible}/>
+          
+        </Modal>
+      </View>
+      <BottomTabs navigation={navigation} />
+    </>
   );
 };
 

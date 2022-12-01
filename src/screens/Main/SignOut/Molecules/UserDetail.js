@@ -54,7 +54,7 @@ const UserDetail = ({AuthData}) => {
       <View style={{}}>
         <View style={{alignSelf: 'flex-start', }}>
           <CustomText
-            label={AuthData?.split("@gmail.com")}
+            label={AuthData?.split("@")[0]}
             alignSelf={'flex-end'}
             fontSize={15}
             fontFamily={Montserrat.SemiBold}

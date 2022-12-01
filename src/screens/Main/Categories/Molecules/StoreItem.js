@@ -6,7 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import React,{useState} from 'react';
+import React, {useState} from 'react';
 import {images} from '../../../../assets/images';
 import commonStyles from '../../../../utils/CommonStyles';
 import CustomText from '../../../../components/CustomText';
@@ -15,20 +15,32 @@ import {Montserrat, Roboto} from '../../../../utils/Fonts';
 import {moderateScale, verticalScale} from 'react-native-size-matters';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {useDispatch} from 'react-redux';
+import constants from '../../../../redux/constants';
 
 const Width = Dimensions.get('window').width;
 const StoreItem = ({item, onPress}) => {
-  const [heart, setHeart] = useState(false)
+  const [heart, setHeart] = useState(false);
   console.log('ItemStoreData', item);
 
-  return item.status==true?
+  const dispatch = useDispatch();
+  const addFavorite = async (store, checkboxValue) => {
+    dispatch({
+      type: constants.ADD_FAVORITE,
+      payload: {
+        ...store,
+        checkboxValue: checkboxValue,
+      },
+    });
+  };
 
+  return item.status==true?
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
       style={styles.mainContainer}>
       <Image
-        source={{uri:item.images.image1}}
+        source={{uri: item.images.image1}}
         // resizeMode="contain"
         style={{width: '100%', height: '100%'}}
       />
@@ -43,38 +55,34 @@ const StoreItem = ({item, onPress}) => {
             alignItems: 'center',
             justifyContent: 'space-between',
           }}>
-            <View style={{width:"80%"}}>
+          <View style={{width: '80%'}}>
             <CustomText
-            label={item.businessName}
-            color={colors.white}
-            numberOfLines={1}
-            
-            fontSize={15}
-            fontWeight="400"
-            fontFamily={Roboto.Regular300}
-          />
+              label={item.businessName}
+              color={colors.white}
+              numberOfLines={1}
+              fontSize={15}
+              fontWeight="400"
+              fontFamily={Roboto.Regular300}
+            />
+          </View>
 
-            </View>
-       
-          <TouchableOpacity 
-          activeOpacity={0.6}
-          onPress={()=>{
-            setHeart(!heart)
-
-          }}
-          style={{marginRight: verticalScale(10)}}
-          >
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={() => {
+              addFavorite(item, !heart);
+              setHeart(!heart);
+            }}
+            style={{marginRight: verticalScale(10)}}>
             <AntDesign
-              name={heart?"heart":"hearto"}
+              name={heart ? 'heart' : 'hearto'}
               size={moderateScale(20)}
-              color={heart? colors.primary: colors.primary}
+              color={colors.primary}
             />
           </TouchableOpacity>
         </View>
       </View>
     </TouchableOpacity>
-    :<></>
-
+  :<></>
 };
 
 export default StoreItem;
@@ -87,7 +95,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     overflow: 'hidden',
     marginBottom: verticalScale(20),
-    marginRight:20,
+    marginRight: 20,
     // paddingRight:
   },
   cover: {

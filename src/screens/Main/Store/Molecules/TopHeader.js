@@ -11,7 +11,8 @@ import commonStyles from '../../../../utils/CommonStyles';
 import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/core';
 
-const TopHeader = ({storeName}) => {
+const TopHeader = ({storeName,storeImages,no}) => {
+  const imagesList = Object.values(storeImages);
   const navigation = useNavigation();
   return (
     <View>
@@ -29,7 +30,7 @@ const TopHeader = ({storeName}) => {
       <View style={styles.mainProgress}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <CustomText
-            label="1"
+            label={no}
             color={colors.black}
             fontSize={15}
             alignSelf={'center'}
@@ -43,7 +44,7 @@ const TopHeader = ({storeName}) => {
             fontFamily={Roboto.SemiBold}
           />
           <CustomText
-            label="5"
+            label={imagesList.length}
             color={colors.black}
             fontSize={15}
             alignSelf={'center'}

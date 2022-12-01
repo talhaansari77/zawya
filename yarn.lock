@@ -6732,6 +6732,11 @@ rimraf@~2.6.2:
   dependencies:
     glob "^7.1.3"
 
+rn-multi-progress-bar@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/rn-multi-progress-bar/-/rn-multi-progress-bar-1.1.2.tgz#babc4cd3f4dc117b12733373b654f537291c08a1"
+  integrity sha512-GU9qtVislCakgutEcYAXoYVEBp5vke9nTx29b2TWw0RLXh+1QtcWgk7Ucn5LBVr9vQxAeBWMUbkPFpS6Gb+S7Q==
+
 run-parallel@^1.1.9:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/run-parallel/-/run-parallel-1.2.0.tgz#66d1368da7bdf921eb9d95bd1a9229e7f21a43ee"
