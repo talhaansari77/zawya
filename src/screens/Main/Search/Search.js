@@ -10,7 +10,7 @@ import {Montserrat} from '../../../utils/Fonts';
 import Loader from '../../../utils/Loader';
 import StoreItem from '../Categories/Molecules/StoreItem';
 
-const App = ({navigation,route}) => {
+const App = ({navigation, route}) => {
   const [search, setSearch] = useState('');
   const [authData, setAuthData] = useState(route?.params?.authData);
   const [filerData, SetFilerData] = useState(route?.params?.authData);

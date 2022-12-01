@@ -13,10 +13,10 @@ import Loader from '../../../utils/Loader';
 
 const AddDesignScreen = ({navigation}) => {
   const [images, setImages] = useState(imageTemplate);
-
   const [authId, setauthId] = useState('');
   const [loading, setLoading] = useState(false);
 
+  
   const [designState, setDesignState] = useState({
     businessName: '',
     headline: '',
@@ -52,15 +52,11 @@ const AddDesignScreen = ({navigation}) => {
 
     try {
       if (authId) {
-          temp2 = {
-            image1: await uploadImage(images.image1, authId),
-            image2: await uploadImage(images.image2, authId),
+        temp2 = {
+          image1: await uploadImage(images.image1, authId),
+          image2: await uploadImage(images.image2, authId),
+        };
 
-
-          
-          };
-        
-         
         await saveUser(authId, {...data, images: temp2});
         console.log('DataSave');
 
@@ -69,7 +65,7 @@ const AddDesignScreen = ({navigation}) => {
         }, 2000);
 
         console.log('dataSave');
-        navigation.navigate('CategoriesScreen')
+        navigation.navigate('CategoriesScreen');
         // navigation.reset({
         //   index: 0,
         //   routes: [{name: 'MainStack'}],

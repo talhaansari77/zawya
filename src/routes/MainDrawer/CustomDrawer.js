@@ -1,13 +1,26 @@
 import {View, Text, ImageBackground, Image} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {images} from '../../assets/images';
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
 import {icons} from '../../assets/icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CustomDrawer = ({...props}) => {
+  const [AuthData, setAuthData] = useState(AuthData);
+
+  useEffect(() => {
+    getAuthData();
+  }, []);
+
+  const getAuthData = async () => {
+    const responseData = await AsyncStorage.getItem('userEmail');
+    setAuthData(responseData);
+  };
+
+
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView
@@ -35,7 +48,7 @@ const CustomDrawer = ({...props}) => {
                 fontWeight: '700',
                 color: '#f3f3f3',
               }}>
-              {'UserName'}
+              {AuthData?.split("@")[0]||'UserName'}
             </Text>
             <Text
               style={{
@@ -44,7 +57,7 @@ const CustomDrawer = ({...props}) => {
                 top: 40,
                 left: -20,
               }}>
-              {"email"}
+              {AuthData||"Email"}
             </Text>
           </View>
         </ImageBackground>

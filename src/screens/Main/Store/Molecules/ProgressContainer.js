@@ -7,30 +7,36 @@ import {ProgressBar} from 'rn-multi-progress-bar';
 
 const ProgressContainer = ({storeImages}) => {
   const imagesList = Object.values(storeImages);
-  const [progress, setProgress] = useState(3000);
+  // const [progress, setProgress] = useState(5000);
   // console.log(storeImages)
   // console.log('imageCount',imageCount)
-  // const useProgress = (maxTimeInSeconds = 300) => {
-  //   const [elapsedTime, setElapsedTime] = useState(0);
-  //   const [progress, setProgress] = useState(0);
+  const useProgress = (maxTimeInSeconds = 300) => {
+    const [elapsedTime, setElapsedTime] = useState(0);
+    const [progress, setProgress] = useState(0);
 
-  //   useEffect(() => {
-  //     const intervalId = setInterval(() => {
-  //       if (progress < 1) {
-  //         setElapsedTime(t => t + 1);
-  //       }
-  //     }, 100);
-  //     return () => clearInterval(intervalId);
-  //   }, []);
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        if (progress < 1) {
+          setElapsedTime(t => t + 1);
+        }
+        
+      }, 100);
+      return () => clearInterval(intervalId);
+    }, []);
 
-  //   useEffect(() => {
-  //     setProgress(elapsedTime / maxTimeInSeconds);
-  //   }, [elapsedTime]);
-
-  //   return progress;
-  // };
-
-  // const progress = useProgress(300);
+    useEffect(() => {
+      setProgress(elapsedTime / maxTimeInSeconds);
+      // console.log(progress,elapsedTime)
+      if (progress === 1) {
+        setElapsedTime(0)
+      }
+    }, [elapsedTime]);
+    
+    return progress;
+  };
+  
+  
+  const progress = useProgress(50);
   // console.log(progress);
 
   // useEffect(() => { 
@@ -43,22 +49,11 @@ const ProgressContainer = ({storeImages}) => {
     <View style={styles.mainContainer}>
       {[1].map(index => (
         <>
-          <ProgressBar
-            shouldAnimate={true} // to enable animation, default false
-            animateDuration={progress} // if animation enabled 
-            data={[{progress: 1, color: colors.primary}]}
-          />
-          {/* <Progress.Bar
+          <Progress.Bar
             progress={progress}
-            // width={null}
-            height={5}
+            width={ (Dimensions.get("window").width/[1].length)-26}
             color={colors.primary}
-            borderColor={'#343a40'}
-            borderRadius={20}
-            style={{
-              width: (Dimensions.get("window").width/[1].length)-26,
-            }}
-          /> */}
+          />
           {/* <Spacer width={5} /> */}
         </>
       ))}

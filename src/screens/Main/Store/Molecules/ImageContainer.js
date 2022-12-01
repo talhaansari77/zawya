@@ -17,8 +17,10 @@ import {scale} from 'react-native-size-matters';
 import TopHeader from './TopHeader';
 import {Spacer} from '../../../../components/Spacer';
 import ProgressContainer from './ProgressContainer';
+import { useNavigation } from '@react-navigation/native';
 
 const ImageContainer = ({storeImages, storeName}) => {
+  const navigation =useNavigation();
   const imagesList = Object.values(storeImages);
   
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -37,6 +39,7 @@ const ImageContainer = ({storeImages, storeName}) => {
       console.log('left', currentIndex);
       sliderRef.current.scrollToIndex({index: currentIndex - 1});
     } else {
+      navigation.navigate("CategoriesScreen")
       console.log('The End', currentIndex);
     }
   };
@@ -44,7 +47,7 @@ const ImageContainer = ({storeImages, storeName}) => {
   useEffect(() => {
     setTimeout(() => {
       scrollTo('right')
-    }, 3000); 
+    }, 6000); 
   }, [currentIndex])
   
   return (
@@ -60,7 +63,7 @@ const ImageContainer = ({storeImages, storeName}) => {
         {/* <Spacer height={15} /> */}
         <ProgressContainer storeImages={storeImages} />
       </PH20>
-      {/* <Spacer height={15} /> */}
+      <Spacer height={15} />
       <FlatList
         data={imagesList}
         keyExtractor={item => String(item)}

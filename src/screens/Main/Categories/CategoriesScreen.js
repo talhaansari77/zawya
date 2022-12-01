@@ -13,15 +13,20 @@ import {useNavigation} from '@react-navigation/core';
 import {verticalScale} from 'react-native-size-matters';
 import BottomTabs from '../../../components/BottomTabs';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getAuthId, getUser} from '../../../../services/FirebaseAuth';
+import {
+  getAuthId,
+  getCategories,
+  getUser,
+} from '../../../../services/FirebaseAuth';
 import {getSpecificeUser} from '../../../../services/FirebaseAuth';
 import Loader from '../../../utils/Loader';
-const CategoryData = [
-  {id: 1, image: images.category1, txt: 'Restaurant'},
-  {id: 2, image: images.category2, txt: 'Food'},
-  {id: 3, image: images.category3, txt: 'Coffee'},
-  {id: 4, image: images.category4, txt: 'Perfume'},
-];
+import { useIsFocused } from '@react-navigation/native';
+// const CategoryData = [
+//   {id: 1, image: images.category1, txt: 'Restaurant'},
+//   {id: 2, image: images.category2, txt: 'Food'},
+//   {id: 3, image: images.category3, txt: 'Coffee'},
+//   {id: 4, image: images.category4, txt: 'Perfume'},
+// ];
 const storeData = [
   {id: 1, image: images.item1, name: 'Store Name'},
   {id: 2, image: images.item2, name: 'Store Name'},
@@ -35,12 +40,35 @@ const CategoriesScreen = ({navigation}) => {
   const [authData, setAuthData] = useState([]);
   const [filerData, SetFilerData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [CategoryData, setCategoryData] = useState([]);
+  const isFocused = useIsFocused();
 
-  
+  useEffect(() => {
+    setLoading(true);
+
+    const res = getCategories();
+    res
+      .then(data => {
+        setCategoryData(data.CategoryData);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     onAuthData();
   }, []);
+
+  useEffect(() => {
+    onAuthData();
+    const res = getCategories();
+    res
+      .then(data => {
+        setCategoryData(data.CategoryData);
+        // setLoading(false);
+      })
+      .catch(e => console.log(e));
+  }, [isFocused]);
 
   console.log('AuthDataIs', authData);
 

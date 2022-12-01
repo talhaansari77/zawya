@@ -24,7 +24,8 @@ const MainDrawer = () => {
           fontSize: 15,
         },
       }}
-      initialRouteName={'Home'}>
+      initialRouteName={'Home'}
+      >
       <Drawer.Screen
         options={{
           drawerIcon: ({color}) => (
