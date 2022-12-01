@@ -13,7 +13,8 @@ export const images={
    category3:require("../images/category3.png"),
    category4:require("../images/category4.png"),
    category5:require("../images/category5.png"),
-   imageFrame:require("../images/imageFrame.png")
+   imageFrame:require("../images/imageFrame.png"),
+   drawerBack:require("../images/bg4.jpg"),
 
 
 

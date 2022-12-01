@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import {View, Text, LogBox} from 'react-native';
 import React from 'react';
 import RootNavigator from './src/routes';
