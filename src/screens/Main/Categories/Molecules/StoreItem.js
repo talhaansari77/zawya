@@ -21,7 +21,8 @@ const StoreItem = ({item, onPress}) => {
   const [heart, setHeart] = useState(false)
   console.log('ItemStoreData', item);
 
-  return (
+  return item.status==true?
+
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
@@ -72,7 +73,8 @@ const StoreItem = ({item, onPress}) => {
         </View>
       </View>
     </TouchableOpacity>
-  );
+    :<></>
+
 };
 
 export default StoreItem;
