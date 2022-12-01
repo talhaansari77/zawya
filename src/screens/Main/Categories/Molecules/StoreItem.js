@@ -24,7 +24,7 @@ const StoreItem = ({item, onPress}) => {
   console.log('ItemStoreData', item);
 
   const dispatch = useDispatch();
-  const addFavorite = async (store, checkboxValue) =>
+  const addFavorite = async (store, checkboxValue) => {
     dispatch({
       type: constants.ADD_FAVORITE,
       payload: {
@@ -32,7 +32,9 @@ const StoreItem = ({item, onPress}) => {
         checkboxValue: checkboxValue,
       },
     });
-  return (
+  };
+
+  return item.status==true?
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
@@ -57,7 +59,7 @@ const StoreItem = ({item, onPress}) => {
             <CustomText
               label={item.businessName}
               color={colors.white}
-              // numberOfLines={1}
+              numberOfLines={1}
               fontSize={15}
               fontWeight="400"
               fontFamily={Roboto.Regular300}
@@ -80,7 +82,7 @@ const StoreItem = ({item, onPress}) => {
         </View>
       </View>
     </TouchableOpacity>
-  );
+  :<></>
 };
 
 export default StoreItem;
