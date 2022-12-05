@@ -16,7 +16,7 @@ const CategoriesItem = ({onCategory,item}) => {
      activeOpacity={0.6} >
       <View style={{marginHorizontal:scale(15)}}>
         <View style={styles.circleImage}>
-          <Image style={commonStyles.img} source={item.image} />
+          <Image style={commonStyles.img} source={{uri:item.image}} />
         </View>
         <CustomText
           label={item.txt}

@@ -12,7 +12,7 @@ import * as Progress from 'react-native-progress';
 import {useNavigation} from '@react-navigation/core';
 
 const TopHeader = ({storeName,storeImages,no}) => {
-  const imagesList = Object.values(storeImages);
+  // const imagesList = Object.values(storeImages);
   const navigation = useNavigation();
   return (
     <View>
@@ -44,7 +44,7 @@ const TopHeader = ({storeName,storeImages,no}) => {
             fontFamily={Roboto.SemiBold}
           />
           <CustomText
-            label={imagesList.length}
+            label={storeImages.length}
             color={colors.black}
             fontSize={15}
             alignSelf={'center'}

@@ -1,5 +1,5 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CustomTextInput from '../../../../components/CustomTextInput';
 import CustomText from '../../../../components/CustomText';
 import {colors} from '../../../../utils/Colors';
@@ -9,11 +9,25 @@ import {scale, verticalScale} from 'react-native-size-matters';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {Spacer} from '../../../../components/Spacer';
 import {OpenImageLib} from '../../../../components/imageSelector';
+import { useIsFocused } from '@react-navigation/native';
 
-const DesignForm = ({designState, setDesignState, images, setImages}) => {
+const DesignForm = ({
+  designState,
+  setDesignState,
+  images,
+  setImages,
+  onAuthData,
+  // banners,
+  // setBanners,
+}) => {
   const [selected, setSelected] = useState('');
   const [banner, setBanner] = useState('');
+  const isFocused = useIsFocused();
 
+  useEffect(() => {
+    onAuthData()
+  }, [isFocused])
+  
   const data = [
     {key: '2', value: 'Appliances'},
     {key: '3', value: 'Cameras'},
@@ -174,11 +188,18 @@ const DesignForm = ({designState, setDesignState, images, setImages}) => {
           onPress={() => {
             OpenImageLib().then(img => {
               setImages({...images, image1: img});
+              // if (banners.length < 9) {
+              //   banners.push(img);
+              // }else{
+              //   alert('You have reached The Limit');
+              // }
             });
           }}>
           <View style={{alignItems: 'center'}}>
             <Image
-              source={images?.image1 ? {uri: images?.image1} : icons.uploadImage}
+              source={
+                images?.image1 ? {uri: images?.image1} : icons.uploadImage
+              }
               resizeMode={images?.image1 ? 'cover' : 'contain'}
               style={{
                 // height: verticalScale(banner ? "100%" : 30),

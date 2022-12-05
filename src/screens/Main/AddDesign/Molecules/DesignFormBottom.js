@@ -1,5 +1,5 @@
 import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import CustomText from '../../../../components/CustomText';
 import {Spacer} from '../../../../components/Spacer';
 import {icons} from '../../../../assets/icons';
@@ -10,7 +10,7 @@ import CustomButton from '../../../../components/CustomButton';
 import {OpenImageLib} from '../../../../components/imageSelector';
 import {useNavigation} from '@react-navigation/core';
 import {SelectList} from 'react-native-dropdown-select-list';
-
+import { getCategories } from '../../../../../services/FirebaseAuth';
 
 const DesignFormBottom = ({
   onHandleSave,
@@ -22,10 +22,10 @@ const DesignFormBottom = ({
   const navigation = useNavigation();
   const [logo, setLogo] = useState('');
 
-
-
   const [templateIndex, setTemplateIndex] = useState(-1);
+  const [CategoryData, setCategoryData] = useState([]);
 
+  
   const data = [
     {key: '2', value: 'Restaurant'},
     {key: '3', value: 'Food'},
@@ -33,10 +33,18 @@ const DesignFormBottom = ({
     {key: '6', value: 'Perfume'},
   ];
 
-   
- 
- 
- 
+  useEffect(() => {
+    const res = getCategories();
+    res
+      .then(data => {
+        let temp = data.CategoryData.map((cat)=>{
+         let transformObj= {key: cat.id, value: cat.txt};
+         return transformObj;
+        })
+        setCategoryData(temp);
+      })
+      console.log("CategoryData===>",CategoryData);
+  }, []);
 
   const designs = [
     {
@@ -112,10 +120,10 @@ const DesignFormBottom = ({
         marginBottom={7}
         marginTop={15}
       />
-      <Spacer height={5}/>
-         <SelectList
+      <Spacer height={5} />
+      <SelectList
         setSelected={val => setDesignState({...designState, category: val})}
-        data={data}
+        data={CategoryData}
         save="value"
         placeholder="Add Category"
         colors={colors.black}
@@ -146,8 +154,8 @@ const DesignFormBottom = ({
         dropdownTextStyles={{
           color: 'black',
         }}
-      /> 
-       {/* <CustomTextInput
+      />
+      {/* <CustomTextInput
         placeholder={'Define Category'}
         backgroundColor={colors.grey1}
         value={designState.category}
@@ -184,14 +192,17 @@ const DesignFormBottom = ({
           }}>
           <View style={{alignItems: 'center'}}>
             <Image
-              source={images?.image2 ? {uri: images?.image2} : icons.uploadImage}
+              source={
+                images?.image2 ? {uri: images?.image2} : icons.uploadImage
+              }
               resizeMode={images?.image2 ? 'cover' : 'contain'}
               style={{
                 height: images?.image2 ? '100%' : verticalScale(30),
                 width: '100%',
-                marginBottom: images?.image2 ? 0 : 5,}}
+                marginBottom: images?.image2 ? 0 : 5,
+              }}
             />
-            {images?.image2 ?(
+            {images?.image2 ? (
               <></>
             ) : (
               <>

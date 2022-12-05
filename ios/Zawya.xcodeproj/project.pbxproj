@@ -17,6 +17,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		33F7095327584EFAB115064B /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8C20837345A4068BA7EC8DB /* Montserrat-Bold.ttf */; };
 		44290A8E501E45579856F0BF /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37A2035186E744AA9DF8828F /* Roboto-BoldItalic.ttf */; };
+		450F7027293BE0480011A258 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 450F7026293BE0480011A258 /* GoogleService-Info.plist */; };
 		4B833C6E2A4B4AD887C77B83 /* Montserrat-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB62031A8E374953959B350C /* Montserrat-BlackItalic.ttf */; };
 		4D36114189424B3F884C9EE4 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 91DF2E59D6F2454EB7C4EE34 /* Roboto-Italic.ttf */; };
 		521BAF3D0E1A4D0BB20855B5 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D990A8B811FF493082E2D876 /* Montserrat-SemiBold.ttf */; };
@@ -31,7 +32,6 @@
 		818DB5F5F15342EF956FC35B /* Montserrat-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD95D0665935472CBF155427 /* Montserrat-ExtraLightItalic.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		88E7FD84E3A04A05AF3BA441 /* Montserrat-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73741E4DD0F048BEAA6DDB29 /* Montserrat-ExtraLight.ttf */; };
-		8A3C8AB629339097006802E9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A3C8AB529339097006802E9 /* GoogleService-Info.plist */; };
 		8A836AA04D69407696E3E75B /* Montserrat-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2FBFFFBE96D4D51AD9F24F5 /* Montserrat-LightItalic.ttf */; };
 		8C09E3D86EB64A28BC3F8327 /* Montserrat-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DF78436A6CB4E2BAD4D33D9 /* Montserrat-Italic.ttf */; };
 		8F806C7D61C347429477D5E0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 42E628061EF04F20AB912C03 /* Roboto-Medium.ttf */; };
@@ -75,6 +75,8 @@
 		3B4392A12AC88292D35C810B /* Pods-Zawya.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zawya.debug.xcconfig"; path = "Target Support Files/Pods-Zawya/Pods-Zawya.debug.xcconfig"; sourceTree = "<group>"; };
 		3BB71F4D0A494351893683CE /* Montserrat-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Black.ttf"; path = "../src/assets/fonts/Montserrat-Black.ttf"; sourceTree = "<group>"; };
 		42E628061EF04F20AB912C03 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Medium.ttf"; path = "../src/assets/fonts/Roboto/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		450F7026293BE0480011A258 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		452F8202293B9BF100A6703D /* Zawya.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Zawya.entitlements; path = Zawya/Zawya.entitlements; sourceTree = "<group>"; };
 		475E287E0CAC4B4B82B859E3 /* Montserrat-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-MediumItalic.ttf"; path = "../src/assets/fonts/Montserrat-MediumItalic.ttf"; sourceTree = "<group>"; };
 		4B405A9B97C642A7878F3C63 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Regular.ttf"; path = "../src/assets/fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		4FD2EBF098064E06BFB89506 /* Montserrat-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Light.ttf"; path = "../src/assets/fonts/Montserrat-Light.ttf"; sourceTree = "<group>"; };
@@ -90,7 +92,6 @@
 		73FA4F0207C64888BCECFA91 /* Montserrat-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-ThinItalic.ttf"; path = "../src/assets/fonts/Montserrat-ThinItalic.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Zawya/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-Zawya-ZawyaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zawya-ZawyaTests.release.xcconfig"; path = "Target Support Files/Pods-Zawya-ZawyaTests/Pods-Zawya-ZawyaTests.release.xcconfig"; sourceTree = "<group>"; };
-		8A3C8AB529339097006802E9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Zawya/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8ACF87C3B3894079B4BF9E3F /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Medium.ttf"; path = "../src/assets/fonts/Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		8DF78436A6CB4E2BAD4D33D9 /* Montserrat-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Montserrat-Italic.ttf"; path = "../src/assets/fonts/Montserrat-Italic.ttf"; sourceTree = "<group>"; };
 		91DF2E59D6F2454EB7C4EE34 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Italic.ttf"; path = "../src/assets/fonts/Roboto/Roboto-Italic.ttf"; sourceTree = "<group>"; };
@@ -148,10 +149,11 @@
 		13B07FAE1A68108700A75B9A /* Zawya */ = {
 			isa = PBXGroup;
 			children = (
+				452F8202293B9BF100A6703D /* Zawya.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
+				450F7026293BE0480011A258 /* GoogleService-Info.plist */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
-				8A3C8AB529339097006802E9 /* GoogleService-Info.plist */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
@@ -352,7 +354,7 @@
 				AEE18ACCE8274464BC544CDA /* Montserrat-BoldItalic.ttf in Resources */,
 				6553C83C720C4958928E2276 /* Montserrat-ExtraBold.ttf in Resources */,
 				E303EB0B6D994EAE8A896ADF /* Montserrat-ExtraBoldItalic.ttf in Resources */,
-				8A3C8AB629339097006802E9 /* GoogleService-Info.plist in Resources */,
+				450F7027293BE0480011A258 /* GoogleService-Info.plist in Resources */,
 				88E7FD84E3A04A05AF3BA441 /* Montserrat-ExtraLight.ttf in Resources */,
 				818DB5F5F15342EF956FC35B /* Montserrat-ExtraLightItalic.ttf in Resources */,
 				8C09E3D86EB64A28BC3F8327 /* Montserrat-Italic.ttf in Resources */,
@@ -577,6 +579,7 @@
 			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-Zawya-ZawyaTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = WH9BJJ2HS4;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -605,6 +608,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = WH9BJJ2HS4;
 				INFOPLIST_FILE = ZawyaTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -628,24 +632,33 @@
 			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-Zawya.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9CQ7TTB3CL;
+				CODE_SIGN_ENTITLEMENTS = Zawya/Zawya.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2.3.4;
+				DEVELOPMENT_TEAM = WH9BJJ2HS4;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Zawya/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Zawya;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.OneApp;
 				PRODUCT_NAME = Zawya;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -655,22 +668,31 @@
 			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-Zawya.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9CQ7TTB3CL;
+				CODE_SIGN_ENTITLEMENTS = Zawya/Zawya.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2.3.4;
+				DEVELOPMENT_TEAM = WH9BJJ2HS4;
 				INFOPLIST_FILE = Zawya/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Zawya;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ios.OneApp;
 				PRODUCT_NAME = Zawya;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

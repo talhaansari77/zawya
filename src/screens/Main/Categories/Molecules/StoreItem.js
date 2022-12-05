@@ -34,7 +34,7 @@ const StoreItem = ({item, onPress}) => {
     });
   };
 
-  return item.status==true?
+  return item.status == true ? (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.7}
@@ -82,7 +82,17 @@ const StoreItem = ({item, onPress}) => {
         </View>
       </View>
     </TouchableOpacity>
-  :<></>
+  ) : (
+    <TouchableOpacity
+      activeOpacity={0.7}
+      style={{...styles.mainContainer,backgroundColor:colors.grey}}>
+      <Image
+        source={images.hold}
+        resizeMode="contain"
+        style={{width: '100%', height: '100%'}}
+      />
+      </TouchableOpacity>
+  );
 };
 
 export default StoreItem;

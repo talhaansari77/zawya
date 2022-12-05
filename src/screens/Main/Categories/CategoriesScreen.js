@@ -20,7 +20,7 @@ import {
 } from '../../../../services/FirebaseAuth';
 import {getSpecificeUser} from '../../../../services/FirebaseAuth';
 import Loader from '../../../utils/Loader';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 // const CategoryData = [
 //   {id: 1, image: images.category1, txt: 'Restaurant'},
 //   {id: 2, image: images.category2, txt: 'Food'},
@@ -41,6 +41,7 @@ const CategoriesScreen = ({navigation}) => {
   const [filerData, SetFilerData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [CategoryData, setCategoryData] = useState([]);
+  const [banners, setBanners] = useState([]);
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -60,7 +61,22 @@ const CategoriesScreen = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    onAuthData();
+    async () => {
+      try {
+        await getAuthId().then(id => {
+          getUser(setAuthData, id);
+          getUser(SetFilerData, id);
+        });
+
+        setTimeout(() => {
+          // setLoading(false);
+        }, 2000);
+      } catch (e) {
+        // setLoading(false);
+        console.log(e);
+      }
+    };
+
     const res = getCategories();
     res
       .then(data => {
@@ -88,7 +104,7 @@ const CategoriesScreen = ({navigation}) => {
         getUser(setAuthData, id);
         getUser(SetFilerData, id);
       });
-
+      setBanners(authData?.banners);
       setTimeout(() => {
         setLoading(false);
       }, 2000);
@@ -102,7 +118,6 @@ const CategoriesScreen = ({navigation}) => {
       <CategoriesItem
         onCategory={() => {
           onFilterData(item);
-
           console.log('ItemData', index);
         }}
         item={item}
@@ -168,8 +183,6 @@ const CategoriesScreen = ({navigation}) => {
             columnWrapperStyle={{
               flex: 1,
               marginHorizontal: 20,
-
-              // justifyContent: 'space-evenly',
             }}
             data={filerData}
             renderItem={renderStore}

@@ -21,7 +21,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const ImageContainer = ({storeImages, storeName}) => {
   const navigation =useNavigation();
-  const imagesList = Object.values(storeImages);
+  // const storeImages = Object.values(storeImages);
   
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -32,7 +32,7 @@ const ImageContainer = ({storeImages, storeName}) => {
   }).current;
 
   const scrollTo = pointer => {
-    if (currentIndex < imagesList.length - 1 && pointer === 'right') {
+    if (currentIndex < storeImages.length - 1 && pointer === 'right') {
       console.log('right', currentIndex);
       sliderRef.current.scrollToIndex({index: currentIndex + 1});
     } else if (currentIndex > 0 && pointer === 'left') {
@@ -65,7 +65,7 @@ const ImageContainer = ({storeImages, storeName}) => {
       </PH20>
       <Spacer height={15} />
       <FlatList
-        data={imagesList}
+        data={storeImages}
         keyExtractor={item => String(item)}
         scrollEventThrottle={32}
         onScroll={Animated.event(

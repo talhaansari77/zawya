@@ -32,8 +32,8 @@ function CustomText(props) {
             marginHorizontal:props.marginHorizontal,
             fontStyle: props.fontStyle,
             fontFamily: props.fontFamily,
-            // numberOfLines: props.numberOfLines,
-            // ellipsizeMode: props.ellipsizeMode,
+            numberOfLines: props.numberOfLines,
+            ellipsizeMode: props.ellipsizeMode,
             marginVertical: verticalScale(props.marginVertical || 0),
             textAlign: props.textAlign,
 

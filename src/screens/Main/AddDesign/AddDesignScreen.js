@@ -6,17 +6,26 @@ import DesignForm from './Molecules/DesignForm';
 import {colors} from '../../../utils/Colors';
 import DesignFormBottom from './Molecules/DesignFormBottom';
 import {imageTemplate} from '../../../utils/Data';
-import {getAuthId} from '../../../../services/FirebaseAuth';
+import {
+  getAuthId,
+  getSpecificeUser,
+  getUser,
+} from '../../../../services/FirebaseAuth';
 import {saveUser} from '../../../../services/FirebaseAuth';
 import {uploadImage} from '../../../../services/FirebaseAuth';
 import Loader from '../../../utils/Loader';
+import {useIsFocused} from '@react-navigation/native';
 
-const AddDesignScreen = ({navigation}) => {
+const AddDesignScreen = ({navigation, route}) => {
   const [images, setImages] = useState(imageTemplate);
+  // const [banners, setBanners] = useState(route?.params?.banners)
+  const [banners, setBanners] = useState([]);
   const [authId, setauthId] = useState('');
   const [loading, setLoading] = useState(false);
+  const [authData, setAuthData] = useState([]);
+  const [counter, setCounter] = useState(0);
+  const isFocused = useIsFocused();
 
-  
   const [designState, setDesignState] = useState({
     businessName: '',
     headline: '',
@@ -29,9 +38,22 @@ const AddDesignScreen = ({navigation}) => {
     getUserId();
   }, []);
 
+  useEffect(() => {
+    onAuthData();
+  }, []);
+
   const getUserId = async () => {
     getAuthId().then(id => {
       setauthId(id);
+    });
+  };
+  const onAuthData = async () => {
+    await getAuthId().then(id => {
+      getSpecificeUser(id).then(data => {
+        setBanners(data?.banners || []);
+        console.log('✋==>', data?.banners || []);
+        console.log('==>', banners || []);
+      });
     });
   };
 
@@ -45,19 +67,33 @@ const AddDesignScreen = ({navigation}) => {
       action: designState.action,
       category: designState.category,
       template: designState.template,
+      banners: banners,
+      storePic: '',
     };
 
-    console.log('djcdbj', data);
+    console.log('Data', data);
     setLoading(true);
 
     try {
       if (authId) {
-        temp2 = {
-          image1: await uploadImage(images.image1, authId),
-          image2: await uploadImage(images.image2, authId),
-        };
+        if (banners.length < 9) {
+          temp2 = {
+            image1: await uploadImage(images.image1, authId),
+            image2: await uploadImage(images.image2, authId),
+          };
+        } else {
+          alert('You have Reached The Limit');
+          return false;
+        }
+        console.log('here <<====');
+        console.log('newBannersList', banners);
+        if (banners.length < 9) banners.push(temp2.image1);
 
-        await saveUser(authId, {...data, images: temp2});
+        await saveUser(authId, {
+          ...data,
+          banners: banners,
+          storePic: temp2.image2,
+        });
         console.log('DataSave');
 
         setTimeout(() => {
@@ -92,6 +128,9 @@ const AddDesignScreen = ({navigation}) => {
               setDesignState={setDesignState}
               images={images}
               setImages={setImages}
+              onAuthData={onAuthData}
+              // banners={banners}
+              // setBanners={setBanners}
             />
             <DesignFormBottom
               designState={designState}

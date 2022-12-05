@@ -31,7 +31,7 @@ const StoreScreen = ({navigation, route}) => {
         </PH20> */}
         {/* <Spacer height={15} /> */}
         <ImageContainer
-          storeImages={route?.params?.userData?.images}
+          storeImages={route?.params?.userData?.banners||[]}
           storeName={route?.params?.userData?.businessName}
         />
         <Spacer height={3} />

@@ -6,7 +6,7 @@ import {Spacer} from '../../../../components/Spacer';
 import {ProgressBar} from 'rn-multi-progress-bar';
 
 const ProgressContainer = ({storeImages}) => {
-  const imagesList = Object.values(storeImages);
+  // const storeImages = Object.values(storeImages);
   // const [progress, setProgress] = useState(5000);
   // console.log(storeImages)
   // console.log('imageCount',imageCount)
@@ -36,7 +36,7 @@ const ProgressContainer = ({storeImages}) => {
   };
   
   
-  const progress = useProgress(50);
+  const progress = useProgress(52);
   // console.log(progress);
 
   // useEffect(() => { 

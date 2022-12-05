@@ -1,4 +1,4 @@
-import {View, Text, TextInput} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {PH20} from '../../../utils/CommonStyles';
 import CustomText from '../../../components/CustomText';
@@ -11,8 +11,22 @@ import CustomButton from '../../../components/CustomButton';
 import {Divider} from 'react-native-elements/dist/divider/Divider';
 import {images} from '../../../assets/images';
 import {ScrollView} from 'react-native-gesture-handler';
-import {getCategories, saveCategories} from '../../../../services/FirebaseAuth';
+import {
+  getAuthId,
+  getCategories,
+  saveCategories,
+  uploadImage,
+} from '../../../../services/FirebaseAuth';
 import Loader from '../../../utils/Loader';
+import {icons} from '../../../assets/icons';
+import {OpenImageLibWithSetter} from '../../../components/imageSelector';
+
+const catImage = [
+  images.category1,
+  images.category2,
+  images.category3,
+  images.category4,
+];
 
 const AddCategories = () => {
   const [search, setSearch] = useState('');
@@ -21,22 +35,34 @@ const AddCategories = () => {
   const [loading, setLoading] = useState(false);
   const [counter, setCounter] = useState(0);
   const [AuthData, setAuthData] = useState(AuthData);
+  const [catImage, setCatImage] = useState('');
 
   const getAuthData = async () => {
     const responseData = await AsyncStorage.getItem('userEmail');
     setAuthData(responseData);
   };
   const onAdd = async txt => {
+    setLoading(true);
     const res = CategoryData.find(cat => cat.txt === txt);
     if (res) {
       alert('Category Already Exist');
-      setNewCat('')
+      setNewCat('');
+      setLoading(false);
     } else {
-      let newCat ={id:Math.random(), image: images.category1, txt: txt}
+      let imagePath = '';
+      await getAuthId().then(async id => {
+        imagePath = await uploadImage(catImage, id);
+      });
+      let newCat = {
+        id: Date.now(),
+        image: imagePath,
+        txt: txt,
+      };
       CategoryData.push(newCat);
       saveCategories({CategoryData: CategoryData});
-      setCounter(counter+1);
-      setNewCat('')
+      setCounter(counter + 1);
+      setNewCat('');
+      setLoading(false);
     }
   };
   const onDelete = async id => {
@@ -65,7 +91,7 @@ const AddCategories = () => {
   //   {id: 4, image: images.category4, txt: 'Perfume'},
   // ]
 
-  const CatItem = ({name, id}) => (
+  const CatItem = ({image, name, id}) => (
     <View
       style={{
         flexDirection: 'row',
@@ -75,13 +101,20 @@ const AddCategories = () => {
         paddingHorizontal: scale(15),
         marginHorizontal: scale(15),
       }}>
-      <View style={{flex: 8}}>
+      <View style={{flex: 7}}>
         <View
           style={{
             paddingHorizontal: scale(15),
             paddingVertical: verticalScale(12),
-            justifyContent: 'center',
+            // justifyContent: 'center',
+            flexDirection: 'row',
+            alignItems: 'center',
           }}>
+          <Image
+            source={{uri: image}}
+            style={{height: verticalScale(30), width: scale(30)}}
+          />
+          <Spacer width={10} />
           <Text
             style={{
               fontSize: verticalScale(16),
@@ -92,10 +125,10 @@ const AddCategories = () => {
           </Text>
         </View>
       </View>
-      <View style={{flex: 2, justifyContent: 'center', alignItems: 'center'}}>
+      <View style={{flex: 3, justifyContent: 'center', alignItems: 'center'}}>
         <CustomButton
           height={40}
-          width={100}
+          width={scale(70)}
           title={'Delete'}
           backgroundColor={colors.red}
           fontSize={12}
@@ -160,6 +193,40 @@ const AddCategories = () => {
       </View>
 
       <Spacer height={20} />
+      <View
+        style={{
+          width: '100%',
+          padding: verticalScale(catImage ? 0 : 25),
+          height: verticalScale(110),
+          borderColor: colors.grey,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            OpenImageLibWithSetter(setCatImage);
+          }}>
+          <View style={{alignItems: 'center'}}>
+            <Image
+              source={catImage ? {uri: catImage} : icons.uploadImage}
+              resizeMode={'contain'}
+              style={{
+                // height: verticalScale(banner ? "100%" : 30),
+                height: catImage ? '100%' : verticalScale(30),
+                width: '100%',
+                marginBottom: catImage ? 0 : 5,
+              }}
+            />
+            {catImage ? (
+              <></>
+            ) : (
+              <>
+                <Spacer height={5} />
+                <CustomText label={'Upload Photo'} />
+              </>
+            )}
+          </View>
+        </TouchableOpacity>
+      </View>
+      <Spacer height={20} />
       <Divider
         width={1}
         color={colors.grey}
@@ -171,7 +238,7 @@ const AddCategories = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         {CategoryData.map(item => (
           <View key={item.id}>
-            <CatItem name={item.txt} id={item.id} />
+            <CatItem name={item.txt} id={item.id} image={item.image} />
             <Spacer height={10} />
           </View>
         ))}

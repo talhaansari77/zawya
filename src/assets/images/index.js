@@ -15,6 +15,7 @@ export const images={
    category5:require("../images/category5.png"),
    imageFrame:require("../images/imageFrame.png"),
    drawerBack:require("../images/bg4.jpg"),
+   hold:require("../images/hold.png"),
 
 
 

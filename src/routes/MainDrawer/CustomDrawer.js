@@ -29,7 +29,7 @@ const CustomDrawer = ({...props}) => {
         <ImageBackground source={images.drawerBack} style={{padding: 20}}>
           <View style={{padding: 30}}>
             <Image
-              source={icons.google}
+              source={images.profileImg}
               style={{
                 height: 80,
                 width: 80,
@@ -43,7 +43,7 @@ const CustomDrawer = ({...props}) => {
             <Text
               style={{
                 top: 40,
-                left: -20,
+                left: -15,
                 fontSize: 20,
                 fontWeight: '700',
                 color: '#f3f3f3',
@@ -55,7 +55,8 @@ const CustomDrawer = ({...props}) => {
                 color: '#f3f3f3',
                 justifyContent: 'center',
                 top: 40,
-                left: -20,
+                left: -15,
+                fontSize:16
               }}>
               {AuthData||"Email"}
             </Text>
