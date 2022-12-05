@@ -40,7 +40,7 @@ const StoreItem = ({item, onPress}) => {
       activeOpacity={0.7}
       style={styles.mainContainer}>
       <Image
-        source={{uri: item.images.image1}}
+        source={{uri: item?.storePic}}
         // resizeMode="contain"
         style={{width: '100%', height: '100%'}}
       />

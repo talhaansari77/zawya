@@ -68,7 +68,6 @@ const AddDesignScreen = ({navigation, route}) => {
       category: designState.category,
       template: designState.template,
       banners: banners,
-      storePic: '',
     };
 
     console.log('Data', data);
